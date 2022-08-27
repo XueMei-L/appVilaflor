@@ -12,19 +12,17 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to database!'));
 
 
-
 const app = express()
 app.use(express.json())
 app.use(cors())
 
 
-const defaultRouter = require('./routers/default');
-app.use('/', defaultRouter)
-
 // importar get, y luego usa /frutas como el directorio
+// const defaultRouter = require('./routers/default');
+// app.use('/', defaultRouter)
+
 const getRouter = require('./routers/get');
 app.use('/frutas', getRouter)
-
 
 
 
