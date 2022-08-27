@@ -1,14 +1,16 @@
 const express = require('express');
-const getRouter = express.Router();
+const router = express.Router();
 const Fruta = require('../models/frutas')
+const User = require('../models/user')
 
-getRouter.get('/', async (req, res) => {
+
+router.get('/', async (req, res) => {
     try {
-        const frutas = await Fruta.find();
+        const user = await User.find();
         // if (song.length !== 0) {
         //     return res.send(song);
         // }
-        res.json(frutas)
+        res.json(user)
         // return res.status(404).send();
     } catch (err) {
         // return res.status(500).send();
@@ -17,4 +19,22 @@ getRouter.get('/', async (req, res) => {
     // res.send('hello world!!');
 })
 
-module.exports = getRouter;
+
+
+router.post('/', async (req, res) => {
+    // crear un nuevo usuario siguendo el Userschema
+    const user = new User({
+        email: req.body.email,
+        password: req.body.password
+    });
+    try{
+        // guardar el usuario en el bbdd
+        const newUser = await user.save();
+        res.status(201).json(newUser);
+    } catch (err) {
+        res.status(400).json({ menssage: err.menssage })
+    }
+})
+
+
+module.exports = router;

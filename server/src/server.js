@@ -21,8 +21,8 @@ app.use(cors())
 // const defaultRouter = require('./routers/default');
 // app.use('/', defaultRouter)
 
-const getRouter = require('./routers/get');
-app.use('/frutas', getRouter)
+const router = require('./routers/get');
+app.use('/users', router)
 
 
 
