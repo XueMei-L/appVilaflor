@@ -17,10 +17,13 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-const getRouter = require('./routers/get')
 
+const defaultRouter = require('./routers/default');
+app.use('/', defaultRouter)
+
+// importar get, y luego usa /frutas como el directorio
+const getRouter = require('./routers/get');
 app.use('/frutas', getRouter)
-
 
 
 
