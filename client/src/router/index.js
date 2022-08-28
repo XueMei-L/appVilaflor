@@ -1,0 +1,73 @@
+/* eslint-disable no-undef */
+import Vue from 'vue'
+import Router from 'vue-router'
+
+import RegisterPage from '@/components/RegisterPage'
+import Home from '@/components/HomePage'
+// import Menu from '@/components/MenuPage'
+// import Contact from '@/components/ContactPage'
+// import Frutas from '@/components/menu_section/frutas'
+
+// import Privacidad from '@/components/footer/privacidad'
+// import TerminoDeUso from '@/components/footer/termino_de_uso'
+// import AvisoLegal from '@/components/footer/aviso_legal'
+// import Empleo from '@/components/footer/empleo'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'HomePage',
+      component: Home
+    },
+    // {
+    //   path: '/Menu',
+    //   name: 'Menu',
+    //   component: Menu
+    // },
+    {
+      path: '/RegisterPage',
+      name: 'RegisterPage',
+      component: RegisterPage
+    },
+    // {
+    //   path: '/contact',
+    //   name: 'Contact',
+    //   component: Contact
+    // },
+
+    // // seccion de menu
+    // {
+    //   path: '/menu_section/frutas',
+    //   name: 'frutas',
+    //   component: Frutas
+    // },
+
+    // // seccion de footer
+    // {
+    //   path: '/footer/privacidad',
+    //   name: 'Privacidad',
+    //   component: Privacidad
+    // },
+
+    // {
+    //   path: '/footer/termino_de_uso',
+    //   name: 'Termino_de_uso',
+    //   component: TerminoDeUso
+    // },
+
+    // {
+    //   path: '/footer/aviso_legal',
+    //   name: 'Aviso_legal',
+    //   component: AvisoLegal
+    // },
+
+    // {
+    //   path: '/footer/empleo',
+    //   name: 'Empleo',
+    //   component: Empleo
+    // }
+  ]
+})

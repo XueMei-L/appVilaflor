@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const mongoose = require('mongoose');
 
 const FrutasSchema = new mongoose.Schema({
@@ -5,13 +7,14 @@ const FrutasSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    kilo: {
-        type: Number,
-        require: true
-    },
+    
     price: {
         type: Number,
         require: true
+    },
+
+    kilo: {
+        type: Number,
     }
 })
 

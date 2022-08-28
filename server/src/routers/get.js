@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 const express = require('express');
 const router = express.Router();
-const Fruta = require('../models/frutas')
+// const Fruta = require('../models/frutas')
 const User = require('../models/user')
 
 
