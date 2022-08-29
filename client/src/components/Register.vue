@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/valid-template-root -->
 <template>
 <html lang="en">
   <head>
@@ -11,7 +10,6 @@
   </head>
 
     <body>
-      <h1>11111111111</h1>
     <!-- El modelo del fondo -->
     <div class="home-container">
       <div class="container-left">
@@ -39,9 +37,9 @@
             <!-- <input type="button" value="Create Your Accout" onclick=javascript:jump()> -->
             </div>
             <!-- mostrar informaciones -->
-            <!-- <p>{{email}}</p>
+            <p>{{email}}</p>
             <p>{{password}}</p>
-            <p>{{password2}}</p> -->
+            <p>{{password2}}</p>
           </form>
           </div>
 
@@ -53,30 +51,30 @@
 </template>
 
 <script>
-// import AuthenticaltionService from '@/services/AuthenticaltionService'
-// export default {
-//   // para retornar objetos
-//   data () {
-//     return {
-//       email: '',
-//       password: '',
-//       password2: ''
-//     }
-//   },
-//   methods: {
-//     async register () {
-//       const response = await AuthenticaltionService.register({
-//         email: this.email,
-//         password: this.password,
-//         password2: this.password2
-//       })
-//       console.log(response.data)
-//       if (this.password !== this.password2) {
-//         console.log(response.password2)
-//       }
-//     }
-//   }
-// }
+import AuthenticaltionService from '@/services/AuthenticaltionService'
+export default {
+  // para retornar objetos
+  data () {
+    return {
+      email: '',
+      password: '',
+      password2: ''
+    }
+  },
+  methods: {
+    async register () {
+      const response = await AuthenticaltionService.register({
+        email: this.email,
+        password: this.password,
+        password2: this.password2
+      })
+      console.log(response.data)
+      if (this.password !== this.password2) {
+        console.log(response.password2)
+      }
+    }
+  }
+}
 </script>
 
 <style>
