@@ -19,12 +19,13 @@ app.use(express.json())
 app.use(cors())
 
 
-// importar get, y luego usa /frutas como el directorio
-// const defaultRouter = require('./routers/default');
-// app.use('/', defaultRouter)
 
+// para accerder a la bbdd usando GET POST DELETE
 const router = require('./routers/get');
-app.use('/users', router)
+const defaultRouter = require( './routers/default');
+
+app.use(router);
+app.use(defaultRouter);
 
 
 

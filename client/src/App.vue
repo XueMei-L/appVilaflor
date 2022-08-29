@@ -1,7 +1,8 @@
 <template>
 <html lang="es">
   <div id=app>
-  <h1>Testing</h1>
+
+  <h1>Testing1</h1>
   <label>email: </label>
   <input type="text" v-model="email" placeholder="ej: vilaflor@gmail.com"/>
   <br /><br />
@@ -9,9 +10,16 @@
   <input type="password" v-model="password" placeholder="password">
   <br /><br />
   <button v-on:click = "postUser"> Registrar </button>
+
+  <h1>Testing2</h1>
+  <label>email: </label>
+  <input type="text" v-model="emailLogin" placeholder="ej: vilaflor@gmail.com"/>
   <br /><br />
-  <button v-on:click = "getUser"> Show User Information </button>
-  <p>user: {{user}}</p>
+  <label>contraseñas:</label>
+  <input type="password" v-model="passwordLogin" placeholder="password">
+  <br /><br />
+  <button v-on:click = "CheckUser"> Login </button>
+  <!-- <p>user: {{user}}</p> -->
 
   </div>
 </html>
@@ -28,7 +36,9 @@ export default {
     return {
       email: null,
       password: null,
-      user: null
+      user: null,
+      emailLogin: null,
+      passwordLogin: null
     }
   },
 
@@ -39,14 +49,27 @@ export default {
           email: this.email,
           password: this.password
         })
-      alert(`Hola, ${this.email}. Has registado de forma correctamente!`)
     },
 
-    getUser () {
-      axios
-        .get('http://localhost:8081/users')
-        .then(response => (this.user = response.data))
-      console.log(`hello world`)
+    async CheckUser () {
+      await axios
+        // .get(`http://localhost:8081/users?email=${this.emailLogin}&password=${this.passwordLogin}`)
+        .get(`http://localhost:8081/users?email=111@gmail.com&&password=111111`)
+        .then((response) => {
+          // console.log(typeof (response))
+          var parsedobj = JSON.parse(JSON.stringify(response))
+          // obtener algun valor concreto
+          console.log(parsedobj.data[0]['email'])
+
+          // this.user = response.data
+          // let email = JSON.stringify((response.data).get('email').value())
+          // console.log(this.user)
+          // console.log(this.user)
+          // alert(email)
+        }, (err) => {
+          alert(`confima que el email o la contraseña esta bien correcta.`)
+          console.log(err)
+        })
     }
   },
 

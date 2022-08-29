@@ -6,11 +6,14 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        require: true
+        required: true,
+        unique: true,
+        // match: RegExp(/\S+@\S+\.\S+/)
     },
     password: {
         type: String,
-        require: true
+        required: true,
+        // match: RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{8,}$/)
     },
     pedido: {
         type: Array,
