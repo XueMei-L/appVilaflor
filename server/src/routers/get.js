@@ -62,9 +62,10 @@ router.get('/users', async (req, res) => {
 router.post('/users', async (req, res) => {
     // crear un nuevo usuario siguendo el Userschema
     const user = new User({
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        pedido: req.body.pedidofrom
+        pedido: req.body.pedido
     });
     try{
         // guardar el usuario en el bbdd

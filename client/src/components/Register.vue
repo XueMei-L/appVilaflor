@@ -25,21 +25,20 @@
             <h2><p style="color:black; margin-top:10%;">Create an accout</p></h2>
 
             <!-- registeer section -->
-            <input type="text" placeholder="Username">
+            <input type="text" v-model="username" placeholder="Username">
+            <p class="err-msg">{{usernamemsg}}</p>
             <input type="email" v-model="email" placeholder="Email">
+            <p class="err-msg">{{emailmsg}}</p>
             <input type="password" v-model="password" placeholder="Password">
-            <input type="password" v-model="password2" placeholder="Confirm Password">
-
+            <input type="password" v-model="repeatpassword" placeholder="Confirm Password">
+            <p class="err-msg">{{passwordmsg}}</p>
             <!-- button of login -->
             <div>
             <!-- <button class="Register" onclick="window.location.href='#'" type="button" id="add">Create Your Accout</button> -->
-            <button class="Register" @click="register" type="button" id="add">Create Your Accout</button>
+            <button class="Register" v-on:click = "postUser" type="button" id="add">Create Your Accout</button>
             <!-- <input type="button" value="Create Your Accout" onclick=javascript:jump()> -->
             </div>
             <!-- mostrar informaciones -->
-            <p>{{email}}</p>
-            <p>{{password}}</p>
-            <p>{{password2}}</p>
           </form>
           </div>
 
@@ -51,28 +50,79 @@
 </template>
 
 <script>
-import AuthenticaltionService from '@/services/AuthenticaltionService'
+import axios from 'axios'
+
 export default {
-  // para retornar objetos
+  name: 'App',
+
+  // devolver datos
   data () {
     return {
-      email: '',
-      password: '',
-      password2: ''
+      username: null,
+      email: null,
+      password: null,
+      repeatpassword: null,
+      usernamemsg: null,
+      emailmsg: null,
+      passwordmsg: null
     }
   },
+
   methods: {
-    async register () {
-      const response = await AuthenticaltionService.register({
-        email: this.email,
-        password: this.password,
-        password2: this.password2
-      })
-      console.log(response.data)
-      if (this.password !== this.password2) {
-        console.log(response.password2)
+    postUser () {
+      const checkuser = this.validate_field(this.username)
+      const checkemail = this.validate_email(this.email)
+      const checkpassword = this.validate_password(this.password, this.repeatpassword)
+
+      if (checkuser && checkemail && checkpassword) {
+        console.log('sss')
+        axios
+          .post('http://localhost:8081/users', {
+            username: this.username,
+            email: this.email,
+            password: this.password
+          })
+      }
+    },
+
+    // check username
+    validate_field (field) {
+      if (field == null) {
+        this.usernamemsg = '*El campo de username es obligatorio.'
+      } else {
+        this.usernamemsg = null
+        return true
+      }
+    },
+
+    // check email
+    validate_email (email) {
+      if (email == null) {
+        this.emailmsg = '*El campo de correo es obligatorio.'
+      } else if (email.match(/\S+@\S+\.\S+/)) {
+        this.emailmsg = null
+        return true
+      } else {
+        this.emailmsg = '*El campo correo no tiene un correo valido.'
+      }
+    },
+
+    // check password and repeatpassword
+    validate_password (password, repeatpassword) {
+      if (password == null) {
+        this.passwordmsg = '*El campo de contraseña es obligatorio.'
+      } else if (password.length < 6) {
+        console.log(2)
+        this.passwordmsg = 'Contaseña invalida, debe tener longuitud minimo de 6.'
+        console.log(this.passwordmsg)
+      } else if (password !== repeatpassword) {
+        this.passwordmsg = 'Las contraseñas no coinciden.'
+      } else {
+        this.passwordmsg = null
+        return true
       }
     }
+
   }
 }
 </script>
@@ -118,5 +168,10 @@ h1 {
   width: 100%;
   height: 600px;
   background: #8ed6b8;
+}
+
+.err-msg {
+  color:red;
+  font-size: 0.81rem;
 }
 </style>
