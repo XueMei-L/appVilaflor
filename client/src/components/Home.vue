@@ -25,11 +25,12 @@
             <h2><p style="color:black; margin-top:10%;">Sign In</p></h2>
 
             <!-- Login with accout -->
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Password">
+            <input type="text" v-model="emailLogin" placeholder="Email">
+            <input type="password" v-model="passwordLogin" placeholder="Password">
 
             <!-- button of login -->
             <div class="sign_in">
+              <p class="err-msg">{{loginmsg}}</p>
               <input type="submit" v-on:click = "CheckUser" value="Login">
             </div>
 
@@ -56,46 +57,28 @@ export default {
   // devolver datos
   data () {
     return {
-      email: null,
-      password: null,
-      user: null,
       emailLogin: null,
-      passwordLogin: null
+      passwordLogin: null,
+      loginmsg: null
     }
   },
 
   methods: {
-    postUser () {
-      axios
-        .post('http://localhost:8081/users', {
-          email: this.email,
-          password: this.password
-        })
-    },
-
     async CheckUser () {
       await axios
-        // .get(`http://localhost:8081/users?email=${this.emailLogin}&password=${this.passwordLogin}`)
-        .get(`http://localhost:8081/users?email=111@gmail.com&&password=111111`)
+        .get(`http://localhost:8081/users?email=${this.emailLogin}&password=${this.passwordLogin}`)
+        // .get(`http://localhost:8081/users?email="111@gmail.com"&password="111111"`)
         .then((response) => {
-          // console.log(typeof (response))
+          alert(`Inicio de seccion correcto`)
+          //
+          this.$router.push('/Menu')
           var parsedobj = JSON.parse(JSON.stringify(response))
-          // obtener algun valor concreto
-          console.log(parsedobj.data[0]['email'])
-
-          // this.user = response.data
-          // let email = JSON.stringify((response.data).get('email').value())
-          // console.log(this.user)
-          // console.log(this.user)
-          // alert(email)
+          console.log(parsedobj.data[0]['username'])
         }, (err) => {
-          alert(`confima que el email o la contraseña esta bien correcta.`)
+          this.loginmsg = 'Confima que el email o la contraseña esta bien correcta.'
           console.log(err)
         })
     }
-  },
-
-  components: {
   }
 }
 </script>

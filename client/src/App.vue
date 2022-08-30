@@ -342,4 +342,9 @@ export default {
       margin-left: 0;
     }
 }
+
+.err-msg {
+  color:red;
+  font-size: 0.7rem;
+}
 </style>
