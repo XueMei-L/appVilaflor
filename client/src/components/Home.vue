@@ -35,7 +35,6 @@
             </div>
 
             <!-- Sign In Not Accout -->
-
             <p>Don't have an account? <br><br><router-link to="/Register">Sign up here</router-link></p>
             <!-- Forgot password change link -->
             <p><a href="https://www.google.com/">Forgot your password?</a></p>
@@ -70,7 +69,7 @@ export default {
         // .get(`http://localhost:8081/users?email="111@gmail.com"&password="111111"`)
         .then((response) => {
           alert(`Inicio de seccion correcto`)
-          //
+          // salto de pagina
           this.$router.push('/Menu')
           var parsedobj = JSON.parse(JSON.stringify(response))
           console.log(parsedobj.data[0]['username'])

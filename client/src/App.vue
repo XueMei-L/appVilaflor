@@ -12,7 +12,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Register">Register</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
-        <li><router-link to="/menu_section/Frutas">Producto</router-link></li>
+        <li><router-link to="/menu_section/frutas">Producto</router-link></li>
         <li><router-link to="#javascript">Pedido</router-link></li>
         <li><router-link to="/contact">Contacto</router-link></li>
         <p class="navegador"></p>

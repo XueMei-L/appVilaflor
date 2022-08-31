@@ -47,7 +47,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -73,12 +73,12 @@ export default {
 
       if (checkuser && checkemail && checkpassword) {
         console.log('sss')
-        // axios
-        //   .post('http://localhost:8081/users', {
-        //     username: this.username,
-        //     email: this.email,
-        //     password: this.password
-        //   })
+        axios
+          .post('http://localhost:8081/users', {
+            username: this.username,
+            email: this.email,
+            password: this.password
+          })
         alert('Usuario creado correctamente, se le redirigira al inicio de sesion')
         this.$router.push('/')
       }

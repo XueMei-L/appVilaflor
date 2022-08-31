@@ -19,18 +19,18 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">FRUTAS Y VEGETALES</div>
-          <a target="_self" href="/menu_section/Frutas">
+          <router-link to = "/menu_section/frutas">
           <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
-          </a>
+          </router-link>
       </div>
       </div>
 
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">PESCADOS</div>
-          <a target="_self" href="#javascript">
+          <!-- <router-link to = "/menu_section/frutas"> -->
           <img src="./imagenes/pescados.jpg" alt="foto de pescados" style="margin:10px; border-radius: 10px;">
-          </a>
+          <!-- <router-link to = "/menu_section/frutas"> -->
       </div>
       </div>
     </div>

@@ -2,20 +2,32 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const mongoose = require('mongoose');
 
-const FrutasSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema({
     name: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    
+    type: {
+        type: String,
+        require: true,
+    },
+    
+    stock: {
+        type: Number,
+        require: true
+    },
+
+    formOfSale: {
         type: String,
         require: true
     },
     
-    price: {
+    pricePerOne: {
         type: Number,
         require: true
     },
-
-    kilo: {
-        type: Number,
-    }
 })
 
-module.exports = mongoose.model('Frutas', FrutasSchema);
+module.exports = mongoose.model('Products', ProductSchema);
