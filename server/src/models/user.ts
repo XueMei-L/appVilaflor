@@ -1,9 +1,17 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
-// eslint-disable-next-line no-undef
-const mongoose = require('mongoose');
+import {Document, Schema, model} from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+/**
+ * Interfaz de un artista
+ */
+ interface UserDocumentInterface extends Document {
+    username: string,
+    email: string,
+    password: string,
+    pedido: string[]
+  }
+  
+
+const UserSchema = new Schema({
     username: {
         type:String,
         require: true,
@@ -20,8 +28,8 @@ const UserSchema = new mongoose.Schema({
         // match: RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,}$/)
     },
     pedido: {
-        type: Array,
+        type: [String],
     }
 })
 
-module.exports = mongoose.model('User', UserSchema);
+export const User = model<UserDocumentInterface>('User', UserSchema);

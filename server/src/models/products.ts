@@ -1,8 +1,18 @@
-/* eslint-disable no-undef */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const mongoose = require('mongoose');
+import {Document, Schema, model} from 'mongoose';
 
-const ProductSchema = new mongoose.Schema({
+/**
+ * Interfaz de un product
+ */
+ interface ProductDocumentInterface extends Document {
+    name: string,
+    type: string,
+    stock: number,
+    formOfSale: string,
+    pricePerOne: number
+  }
+  
+
+const ProductSchema = new Schema({
     name: {
         type: String,
         require: true,
@@ -30,4 +40,5 @@ const ProductSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Product', ProductSchema);
+export const Product = model<ProductDocumentInterface>('Product', ProductSchema);
+
