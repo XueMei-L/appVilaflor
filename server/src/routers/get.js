@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 // const Fruta = require('../models/frutas')
 const User = require('../models/user')
+const Product = require('../models/products')
 
 
 /**
@@ -60,20 +61,27 @@ router.get('/users', async (req, res) => {
  * Crear un nuevo usuario para bbdd
  */
 router.post('/users', async (req, res) => {
-    // crear un nuevo usuario siguendo el Userschema
-    const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        pedido: req.body.pedido
-    });
     try{
         // guardar el usuario en el bbdd
-        const newUser = await user.save();
+        const newUser = await User.create(req.body);
         res.status(201).json(newUser);
-        alert(`Hola, ${req.body.email}. Has registado de forma correctamente!`)
     } catch (err) {
         res.status(400).send({ error: 'This email account is already in exist.'})
+    }
+})
+
+
+/**
+ * Crear un nuevo producto para bbdd
+ */
+ router.post('/products', async (req, res) => {
+    // console.log('Agregar un nuevo producto')
+    try{
+        // guardar el producto en el bbdd
+        const newProduct = await Product.create(req.body);
+        res.status(201).json(newProduct);
+    } catch (err) {
+        res.status(400).send({ error: 'Ya existe este producto.'})
     }
 })
 

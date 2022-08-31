@@ -74,7 +74,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'App',
 
@@ -97,15 +97,16 @@ export default {
     addProduct () {
       if (this.productType && this.productName && this.productStock && this.productFormOfSale) {
         console.log(`eeeee`)
-        // axios
-        //   .post('http://localhost:8081/products', {
-        //     username: this.username,
-        //     name: this.productName,
-        //     type: this.productType,
-        //     stock: this.productStock,
-        //     formOfSale: this.productFormOfSale,
-        //     pricePerOne: this.productPrice
-        //   })
+        axios
+          .post('http://localhost:8081/products', {
+            name: this.productName,
+            type: this.productType,
+            stock: this.productStock,
+            formOfSale: this.productFormOfSale,
+            pricePerOne: this.productPrice
+          })
+        alert(`Agregado el nuevo producto (${this.productName})`)
+        this.$router.push('/menu_section/frutas')
       } else {
         alert('Deben tener todos los campos rellenados')
       }
