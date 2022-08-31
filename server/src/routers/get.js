@@ -86,4 +86,10 @@ router.post('/users', async (req, res) => {
 })
 
 
+// Para subir imagenes
+const controller = require("../middleware/file.controller");
+router.post("/upload", controller.upload);
+router.get("/files", controller.getListFiles);
+router.get("/files/:name", controller.download);
+
 module.exports = router;
