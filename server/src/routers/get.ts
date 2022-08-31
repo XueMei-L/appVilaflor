@@ -103,6 +103,7 @@ router.get('/products', async (req, res) => {
 //     }
 // })
 
+// Subir fotos
 router.post('/imgs', multer.single('image') , async (req, res) => {
     // console.log(req.body)
     console.log(req.file?.path)
@@ -119,32 +120,29 @@ router.post('/imgs', multer.single('image') , async (req, res) => {
         // console.log(JSON.stringify(image))
         res.status(201).send({ menssage: 'Succesfully!!'})
     } catch (err) {
-        res.status(400).send({ error: 'Ya existe este producto.'})
+        res.status(400).send({ error: 'Ya existe este img.'})
     }
 })
 
-router.get('/imgs', (req, res) => {
+router.get('/imgs', async (req, res) => {
     console.log('Here')
-    console.log(req.body)
-    res.status(201).send( { "message": "helloworld" } )
-    // try {
-    //     // introducir emai e passoword para filtrar
-    //     const filter = req.query.email?{
-    //         email: req.query.email.toString(),
-    //         password: req.query.password.toString()
-    //     }:{};
-    //     const user = await User.find(filter);
 
-    //     // forma de encontrar dato concreto
-    //     console.log(user[0]['email'])
+    try {
+        const filter = req.query.name?{
+            name: req.query.name.toString(),
+        }:{};
+        const img = await Image.find(filter);
 
+        // forma de encontrar dato concreto
+        console.log(img[0]['imgPath'])
 
-    //     if (user.length !== 0) {
-    //         return res.send(user);
-    //     } else {
-    //         return res.status(404).send();
-    //     }
-    // } catch (error) {
-    //     return res.status(500).send();
-    // }
+        if (img.length !== 0) {
+            return res.send(img);
+        } else {
+            return res.status(404).send();
+        }
+    } catch (error) {
+        return res.status(500).send();
+    }
+
 })
