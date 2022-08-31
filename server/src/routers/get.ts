@@ -1,18 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
-// const express = require('express');
-// const router = express.Router();
-// // const Fruta = require('../models/frutas')
-// const User = require('../models/user')
-// // const Image = require('../models/products')
-// const path = require('path')
-
-
-import express from 'express'
-import { User } from '../models/user'
-// import { Product } from '../models/products'
-import path from 'path'
+import express from 'express';
+import { User } from '../models/user';
+import { Product } from '../models/products';
+import { Image } from '../models/image';
+// import path from 'path';
+import multer from '../libs/multer';
 
 
 export const router = express.Router();
@@ -64,25 +55,25 @@ router.post('/users', async (req, res) => {
 })
 
 
-// router.get('/products', async (req, res) => {
-//     try {
-//         const filter = req.query.name?{
-//             name: req.query.name.toString(),
-//         }:{};
-//         const product = await Product.find(filter);
+router.get('/products', async (req, res) => {
+    try {
+        const filter = req.query.name?{
+            name: req.query.name.toString(),
+        }:{};
+        const product = await Product.find(filter);
 
-//         // forma de encontrar dato concreto
-//         console.log(user[0]['pricePerOne'])
+        // forma de encontrar dato concreto
+        console.log(product[0]['pricePerOne'])
 
-//         if (product.length !== 0) {
-//             return res.send(product);
-//         } else {
-//             return res.status(404).send();
-//         }
-//     } catch (error) {
-//         return res.status(500).send();
-//     }
-// })
+        if (product.length !== 0) {
+            return res.send(product);
+        } else {
+            return res.status(404).send();
+        }
+    } catch (error) {
+        return res.status(500).send();
+    }
+})
 
 /**
  * Crear un nuevo producto para bbdd
@@ -112,15 +103,27 @@ router.post('/users', async (req, res) => {
 //     }
 // })
 
-
-import multer from '../libs/multer'
-
-router.post('/img', multer.single('image') ,(req, res) => {
-    console.log('posted')
-    res.status(201).send( {"message": "posted"} )
+router.post('/imgs', multer.single('image') , async (req, res) => {
+    // console.log(req.body)
+    console.log(req.file?.path)
+    try {
+        const newImage = new Image({
+            name: req.body.name,
+            description: req.body.description,
+            imgPath: req.file?.path
+        });
+        console.log('posted')
+        const image = await newImage.save();
+        console.log(image);
+        
+        // console.log(JSON.stringify(image))
+        res.status(201).send({ menssage: 'Succesfully!!'})
+    } catch (err) {
+        res.status(400).send({ error: 'Ya existe este producto.'})
+    }
 })
 
-router.get('/img', (req, res) => {
+router.get('/imgs', (req, res) => {
     console.log('Here')
     console.log(req.body)
     res.status(201).send( { "message": "helloworld" } )
