@@ -15,7 +15,7 @@ import { User } from '../models/user'
 import path from 'path'
 
 
-const router = express.Router();
+export const router = express.Router();
 
 
 /** 
@@ -113,7 +113,7 @@ router.post('/users', async (req, res) => {
 // })
 
 
-const multer = require('../libs/multer')
+import multer from '../libs/multer'
 
 router.post('/img', multer.single('image') ,(req, res) => {
     console.log('posted')
@@ -145,5 +145,3 @@ router.get('/img', (req, res) => {
     //     return res.status(500).send();
     // }
 })
-
-module.exports = router;
