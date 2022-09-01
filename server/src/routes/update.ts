@@ -20,7 +20,7 @@ appPatchRouter.patch('/products', async (req, res) => {
     });
   }
 
-  const allowedUpdates = ['name', 'type', 'stock', 'formOfSale', 'PricePerOne'];
+  const allowedUpdates = ['name', 'type', 'stock', 'formOfSale', 'pricePerOne'];
   const actualUpdates = Object.keys(req.body);
   const isValidUpdate =
     actualUpdates.every((update) => allowedUpdates.includes(update));

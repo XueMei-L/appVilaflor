@@ -31,7 +31,6 @@ appPostRouter.post('/users', async (req, res) => {
  */
 appPostRouter.post('/products', multer.single('file') , async (req, res) => {
     try {
-        console.log('Here')
         const newProduct = new Product({
             name: req.body.name,
             type: req.body.type,
