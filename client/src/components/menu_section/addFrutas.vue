@@ -46,7 +46,7 @@
             <input type="number" step="any" min="0" v-model="productPrice" placeholder="Precio"> €<br/><br/>
             <!-- Informacion - Imagen que corresponde -->
             <label>Imagen:</label>
-            <input type="file" @change="onChangeFile" required enctype="multipart/form-data">
+            <input type="file" ref="file" @change="onChangeFile" enctype="multipart/form-data" required>
             <!-- <input type="submit">upload -->
             <br/><br/>
         </div>
@@ -65,7 +65,7 @@
             <label>Precio: {{productPrice}} €</label><br/><br/>
             <label>Imagen:</label><img class="viewImage" src="" alt="" id="viewImg"><br/><br/>
         </div>
-        <button class="button" style="margin-bottom:10px;" v-on:click="addProduct">Añadir</button>
+        <button class="button" style="margin-bottom:10px;" v-on:click="addImg">Añadir</button>
       </div>
       </div>
 
@@ -99,40 +99,51 @@ export default {
       this.$router.back(-1)
     },
     onChangeFile (event) {
-      console.log('2222')
       if (event.target.files[0]) {
-        console.log(event.target.files[0])
-        this.ProductImgFile = event.target.files[0]
+        this.ProductImgFile = this.$refs.file.files[0]
+
+        // preview image
         const reader = new FileReader()
         reader.onload = function () {
           document.getElementById('viewImg').src = reader.result
         }
         reader.readAsDataURL(this.ProductImgFile)
+
+        console.log('uploading...')
       }
     },
 
     // Add a new product to database
-    addProduct () {
-      if (this.ProductImgFile) {
-        console.log('uploading...')
-        console.log(this.ProductImgFile)
-        axios
-          .post('http://localhost:8081/products', {
-            name: this.productName,
-            type: this.productType,
-            stock: this.productStock,
-            formOfSale: this.productFormOfSale,
-            pricePerOne: this.productPrice,
-            image: this.ProductImgFile
-          })
+    async addProduct () {
+      const formData = new FormData()
+      formData.append('file', this.ProductImgFile)
+      formData.append('name', this.productName)
+      formData.append('type', this.productType)
+      formData.append('stock', this.productStock)
+      formData.append('formOfSale', this.productFormOfSale)
+      formData.append('price', this.productPrice)
+
+      console.log('uploading..')
+      console.log(formData)
+
+      try {
+        await axios({
+          url: 'http://localhost:8081/products',
+          method: 'POST',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+
         alert(`Agregado el nuevo producto (${this.productName})`)
-      } else {
-        alert('Deben tener todos los campos rellenados')
+      } catch (err) {
+        console.log(err)
       }
     }
-
   }
 }
+
 </script>
 <style>
 

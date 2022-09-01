@@ -40,7 +40,7 @@ const ProductSchema = new Schema({
         require: true
     },
 
-    imgPath: {
+    imagePath: {
         type: String,
         require: true
     }
