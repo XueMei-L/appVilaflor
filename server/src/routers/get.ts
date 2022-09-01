@@ -1,8 +1,6 @@
 import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
-import { Image } from '../models/image';
-// import path from 'path';
 import multer from '../libs/multer';
 
 
@@ -19,16 +17,13 @@ export const router = express.Router();
  */
 router.get('/users', async (req, res) => {
     try {
-        // introducir emai e passoword para filtrar
         const filter = req.query.email?{
             email: req.query.email.toString(),
-            // password: req.query.password.toString()
         }:{};
         const user = await User.find(filter);
 
         // forma de encontrar dato concreto
-        console.log(user[0]['email'])
-
+        console.log(user[0]['username'])
 
         if (user.length !== 0) {
             return res.send(user);
@@ -55,6 +50,7 @@ router.post('/users', async (req, res) => {
 })
 
 
+
 router.get('/products', async (req, res) => {
     try {
         const filter = req.query.name?{
@@ -63,7 +59,7 @@ router.get('/products', async (req, res) => {
         const product = await Product.find(filter);
 
         // forma de encontrar dato concreto
-        console.log(product[0]['pricePerOne'])
+        console.log(product[0]['imgPath'])
 
         if (product.length !== 0) {
             return res.send(product);
@@ -78,71 +74,72 @@ router.get('/products', async (req, res) => {
 /**
  * Crear un nuevo producto para bbdd
  */
-// router.post('/products', async (req, res) => {
-//     console.log('Here, funcion de post')
-//     console.log(req.body)
-//     // console.log('Agregar un nuevo producto')
-//     try{
-//         // guardar el producto en el bbdd
-//         req.file.path
-//         const newProduct = new Product({
+router.post('/products', multer.single('image'), async (req, res) => {
+    console.log('Here, funcion de post de products')
+    // console.log('Agregar un nuevo producto')
+    console.log(req.file)
+    try{
+        if (req.file) {
+            // guardar el producto en el bbdd
+            const newProduct = new Product({
+                name: req.body.name,
+                type: req.body.type,
+                stock: req.body.stock,
+                formOfSale: req.body.formOfSale,
+                pricePerOne: req.body.pricePerOne,
+                imagePath: req.file.path,
+            });
+
+            const product = await newProduct.save();
+            console.log(JSON.stringify(product))
+            res.status(201).json(product);
+        }
+
+    } catch (err) {
+        res.status(400).send({ error: 'Ya existe este producto.'})
+    }
+})
+
+// Subir fotos
+// router.post('/imgs', multer.single('image') , async (req, res) => {
+//     // console.log(req.body)
+//     console.log(req.file?.path)
+//     try {
+//         const newImage = new Image({
 //             name: req.body.name,
-//             type: req.body.type,
-//             stock: req.body.stock,
-//             formOfSale: req.body.formOfSale,
-//             pricePerOne: req.body.pricePerOne,
-//             // imgPath: req.file.path,
+//             description: req.body.description,
+//             imgPath: req.file?.path
 //         });
-
-//         const product = await newProduct.save();
-//         console.log(JSON.stringify(product))
-
-//         res.status(201).json(product);
+//         console.log('posted')
+//         const image = await newImage.save();
+//         console.log(image);
+        
+//         // console.log(JSON.stringify(image))
+//         res.status(201).send({ menssage: 'Succesfully!!'})
 //     } catch (err) {
-//         res.status(400).send({ error: 'Ya existe este producto.'})
+//         res.status(400).send({ error: 'Ya existe este img.'})
 //     }
 // })
 
-// Subir fotos
-router.post('/imgs', multer.single('image') , async (req, res) => {
-    // console.log(req.body)
-    console.log(req.file?.path)
-    try {
-        const newImage = new Image({
-            name: req.body.name,
-            description: req.body.description,
-            imgPath: req.file?.path
-        });
-        console.log('posted')
-        const image = await newImage.save();
-        console.log(image);
-        
-        // console.log(JSON.stringify(image))
-        res.status(201).send({ menssage: 'Succesfully!!'})
-    } catch (err) {
-        res.status(400).send({ error: 'Ya existe este img.'})
-    }
-})
+// router.get('/imgs', async (req, res) => {
+//     console.log('Here')
 
-router.get('/imgs', async (req, res) => {
-    console.log('Here')
+//     try {
+//         const filter = req.query.name?{
+//             name: req.query.name.toString(),
+//         }:{};
+//         const img = await Image.find(filter);
 
-    try {
-        const filter = req.query.name?{
-            name: req.query.name.toString(),
-        }:{};
-        const img = await Image.find(filter);
+//         // forma de encontrar dato concreto
+//         console.log(img[0]['imgPath'])
 
-        // forma de encontrar dato concreto
-        console.log(img[0]['imgPath'])
+//         if (img.length !== 0) {
+//             return res.send(img);
+//         } else {
+//             return res.status(404).send();
+//         }
+//     } catch (error) {
+//         return res.status(500).send();
+//     }
 
-        if (img.length !== 0) {
-            return res.send(img);
-        } else {
-            return res.status(404).send();
-        }
-    } catch (error) {
-        return res.status(500).send();
-    }
-
-})
+// })

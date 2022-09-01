@@ -8,7 +8,8 @@ import {Document, Schema, model} from 'mongoose';
     type: string,
     stock: number,
     formOfSale: string,
-    pricePerOne: number
+    pricePerOne: number,
+    imgPath: string,
   }
   
 
@@ -38,6 +39,11 @@ const ProductSchema = new Schema({
         type: Number,
         require: true
     },
+
+    imgPath: {
+        type: String,
+        require: true
+    }
 })
 
 export const Product = model<ProductDocumentInterface>('Product', ProductSchema);

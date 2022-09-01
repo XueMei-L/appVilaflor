@@ -45,7 +45,10 @@
             <label>Precio:</label>
             <input type="number" step="any" min="0" v-model="productPrice" placeholder="Precio"> €<br/><br/>
             <!-- Informacion - Imagen que corresponde -->
-            <label>Imagen:</label><br/><br/>
+            <label>Imagen:</label>
+            <input type="file" @change="onChangeFile" required enctype="multipart/form-data">
+            <!-- <input type="submit">upload -->
+            <br/><br/>
         </div>
         <button class="button" style="margin-bottom:10px;" v-on:click="addProduct">Añadir</button>
       </div>
@@ -60,9 +63,9 @@
             <label>Stock: {{productStock}}</label><br/><br/>
             <label>Forma de venta: {{productFormOfSale}}</label><br/><br/>
             <label>Precio: {{productPrice}} €</label><br/><br/>
-            <label>Imagen:</label><br/><br/>
+            <label>Imagen:</label><img class="viewImage" src="" alt="" id="viewImg"><br/><br/>
         </div>
-        <button class="button" style="margin-bottom:10px;">Añadir</button>
+        <button class="button" style="margin-bottom:10px;" v-on:click="addProduct">Añadir</button>
       </div>
       </div>
 
@@ -75,6 +78,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   name: 'App',
 
@@ -84,7 +88,8 @@ export default {
       productName: null,
       productStock: null,
       productFormOfSale: null,
-      productPrice: null
+      productPrice: null,
+      ProductImgFile: null
     }
   },
 
@@ -93,24 +98,39 @@ export default {
     back () {
       this.$router.back(-1)
     },
-    // Post un nuevo producto
+    onChangeFile (event) {
+      console.log('2222')
+      if (event.target.files[0]) {
+        console.log(event.target.files[0])
+        this.ProductImgFile = event.target.files[0]
+        const reader = new FileReader()
+        reader.onload = function () {
+          document.getElementById('viewImg').src = reader.result
+        }
+        reader.readAsDataURL(this.ProductImgFile)
+      }
+    },
+
+    // Add a new product to database
     addProduct () {
-      if (this.productType && this.productName && this.productStock && this.productFormOfSale) {
-        console.log(`eeeee`)
+      if (this.ProductImgFile) {
+        console.log('uploading...')
+        console.log(this.ProductImgFile)
         axios
           .post('http://localhost:8081/products', {
             name: this.productName,
             type: this.productType,
             stock: this.productStock,
             formOfSale: this.productFormOfSale,
-            pricePerOne: this.productPrice
+            pricePerOne: this.productPrice,
+            image: this.ProductImgFile
           })
         alert(`Agregado el nuevo producto (${this.productName})`)
-        this.$router.push('/menu_section/frutas')
       } else {
         alert('Deben tener todos los campos rellenados')
       }
     }
+
   }
 }
 </script>
