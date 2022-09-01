@@ -9,14 +9,20 @@ export const appPostRouter = express();
 /**
  * Crear un nuevo usuario para bbdd
  */
-appPostRouter.post('/users', async (req, res) => {
-    try{
-        // guardar el usuario en el bbdd
-        const newUser = await User.create(req.body);
-        res.status(201).json(newUser);
-    } catch (err) {
-        res.status(400).send({ error: 'This email account is already in exist.'})
-    }
+ appPostRouter.post('/users', async (req, res) => {
+  try{
+      // guardar el usuario en el bbdd
+      const newUser = new User({
+          username: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+      });
+      const user = await newUser.save();
+      console.log(user);
+      res.status(201).json(user);
+  } catch (err) {
+      res.status(400).send({ error: 'This email account is already in exist.'})
+  }
 })
 
 /**

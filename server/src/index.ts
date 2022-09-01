@@ -8,6 +8,7 @@ import morgan from 'morgan'
 
 import { appGetRouter } from './routes/get';
 import { appPostRouter } from './routes/post';
+import { appDeleteRouter } from './routes/delete';
 
 // import {patchRouter} from './routers/patch';
 // import {deleteRouter} from './routers/delete';
@@ -24,6 +25,7 @@ app.use(morgan('dev'))
 app.use(appGetRouter);
 app.use(defaultRouter);
 app.use(appPostRouter);
+app.use(appDeleteRouter);
 // app.use(postRouter);
 // app.use(patchRouter);
 // app.use(deleteRouter);
