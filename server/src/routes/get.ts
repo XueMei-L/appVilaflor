@@ -2,11 +2,9 @@
 import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
-import { Image } from '../models/image';
 import multer from '../libs/multer';
 import fs from 'fs-extra'
 import { config } from 'dotenv';
-
 
 export const router = express();
 
@@ -65,7 +63,7 @@ router.get('/products', async (req, res) => {
         const product = await Product.find(filter);
 
         // forma de encontrar dato concreto
-        console.log(product[0]['imgPath'])
+        console.log(product[0]['imagePath'])
 
         if (product.length !== 0) {
             return res.send(product);
@@ -76,9 +74,6 @@ router.get('/products', async (req, res) => {
         return res.status(500).send();
     }
 })
-
-
-
 
 
 // Crear un nuevo producto

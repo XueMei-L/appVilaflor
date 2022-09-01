@@ -9,7 +9,7 @@ import {Document, Schema, model} from 'mongoose';
     stock: number,
     formOfSale: string,
     pricePerOne: number,
-    imgPath: string,
+    imagePath: string,
   }
   
 

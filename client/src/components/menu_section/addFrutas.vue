@@ -65,7 +65,7 @@
             <label>Precio: {{productPrice}} €</label><br/><br/>
             <label>Imagen:</label><img class="viewImage" src="" alt="" id="viewImg"><br/><br/>
         </div>
-        <button class="button" style="margin-bottom:10px;" v-on:click="addImg">Añadir</button>
+        <button class="button" style="margin-bottom:10px;" v-on:click="addProduct">Añadir</button>
       </div>
       </div>
 
