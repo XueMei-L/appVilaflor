@@ -121,7 +121,7 @@ export default {
       formData.append('type', this.productType)
       formData.append('stock', this.productStock)
       formData.append('formOfSale', this.productFormOfSale)
-      formData.append('price', this.productPrice)
+      formData.append('pricePerOne', this.productPrice)
 
       console.log('uploading..')
       console.log(formData)

@@ -2,9 +2,6 @@
 import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
-import multer from '../libs/multer';
-import fs from 'fs-extra'
-import { config } from 'dotenv';
 
 export const appGetRouter = express();
 

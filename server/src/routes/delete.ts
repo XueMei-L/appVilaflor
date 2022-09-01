@@ -3,6 +3,10 @@ import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
 
+import path from 'path';
+import fs from 'fs-extra';
+
+
 export const appDeleteRouter = express();
 
 /** 
@@ -13,7 +17,6 @@ export const appDeleteRouter = express();
 /**
  * Eliminar un producto
  */
-
 appDeleteRouter.delete('/products', async (req, res) => {
     if (!req.query.name) {
       return res.status(400).send({
@@ -22,10 +25,14 @@ appDeleteRouter.delete('/products', async (req, res) => {
     }
   
     try {
+      // filtra para encontrar el objecto
       const product = await Product.findOneAndDelete({title: req.query.name.toString()});
   
       if (!product) {
         return res.status(404).send();
+      } else {
+        // Para eliminar la imagen
+        await fs.unlink(path.resolve(product.imagePath))
       }
   
       return res.send(product);

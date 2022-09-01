@@ -9,7 +9,8 @@ export const appPostRouter = express();
 /**
  * Crear un nuevo usuario para bbdd
  */
- appPostRouter.post('/users', async (req, res) => {
+appPostRouter.post('/users', async (req, res) => {
+  console.log('here')
   try{
       // guardar el usuario en el bbdd
       const newUser = new User({
@@ -28,7 +29,7 @@ export const appPostRouter = express();
 /**
  * Crear un nuevo producto para bbdd
  */
-appPostRouter.post('/products', multer.single('file') , async (req, res, next) => {
+appPostRouter.post('/products', multer.single('file') , async (req, res) => {
     try {
         console.log('Here')
         const newProduct = new Product({

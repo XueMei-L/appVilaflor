@@ -14,36 +14,35 @@ export const appPatchRouter = express();
  * Actualización de un producto mediante query string
  */
 appPatchRouter.patch('/products', async (req, res) => {
-    if (!req.query.name) {
-      return res.status(400).send({
-        error: 'A name must be provided',
-      });
+  if (!req.query.name) {
+    return res.status(400).send({
+      error: 'A name must be provided',
+    });
+  }
+
+  const allowedUpdates = ['name', 'type', 'stock', 'formOfSale', 'PricePerOne'];
+  const actualUpdates = Object.keys(req.body);
+  const isValidUpdate =
+    actualUpdates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+  try {
+    const updateProduct =
+    await Product.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updateProduct) {
+      return res.status(404).send();
     }
-  
-    const allowedUpdates = ['name', 'type', 'stock', 'formOfSale', 'pricePerOne', 'imagePath'];
-    const actualUpdates = Object.keys(req.body);
-    const isValidUpdate =
-      actualUpdates.every((update) => allowedUpdates.includes(update));
-  
-    if (!isValidUpdate) {
-      return res.status(400).send({
-        error: 'Update is not permitted',
-      });
-    }
-  
-    try {
-      const product =
-      await Product.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
-        new: true,
-        runValidators: true,
-      });
-  
-      if (!product) {
-        return res.status(404).send();
-      }
-  
-      return res.send(product);
-    } catch (error) {
-      return res.status(400).send(error);
-    }
+
+    return res.send(updateProduct);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
 });

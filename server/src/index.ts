@@ -20,15 +20,19 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'))
 
+
 // para accerder a la bbdd usando GET POST DELETE
 app.use(appGetRouter);
-app.use(defaultRouter);
 app.use(appPostRouter);
 app.use(appDeleteRouter);
 app.use(appPatchRouter);
+app.use(defaultRouter);
+
 
 app.use('/uploads', express.static(path.resolve('uploads')))
 
+
+// Connection to Server
 const port = process.env.PORT || 8081;
 
 app.listen(port, () => {
