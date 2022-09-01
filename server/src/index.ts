@@ -3,15 +3,14 @@ import cors from 'cors';
 import './db/mongoose';
 // ayuda a saber datos de GET
 import morgan from 'morgan'
-// import path from 'path'
+import path from 'path'
 
 
 import { appGetRouter } from './routes/get';
 import { appPostRouter } from './routes/post';
 import { appDeleteRouter } from './routes/delete';
+import { appPatchRouter } from './routes/update';
 
-// import {patchRouter} from './routers/patch';
-// import {deleteRouter} from './routers/delete';
 import {defaultRouter} from './routes/default';
 
 
@@ -26,21 +25,9 @@ app.use(appGetRouter);
 app.use(defaultRouter);
 app.use(appPostRouter);
 app.use(appDeleteRouter);
-// app.use(postRouter);
-// app.use(patchRouter);
-// app.use(deleteRouter);
+app.use(appPatchRouter);
 
-
-
-// import bodyParser from 'body-parser';
-
-// app.use(bodyParser.json({limit: '50mb'}));
-// app.use(bodyParser.urlencoded({  
-//   extended: true
-// }));
-// app.use(express.urlencoded({ extended: true }));
-
-// app.use('/uploads', express.static(path.resolve('uploads')))
+app.use('/uploads', express.static(path.resolve('uploads')))
 
 const port = process.env.PORT || 8081;
 
