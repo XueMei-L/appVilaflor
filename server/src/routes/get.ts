@@ -6,8 +6,7 @@ import multer from '../libs/multer';
 import fs from 'fs-extra'
 import { config } from 'dotenv';
 
-export const router = express();
-
+export const appGetRouter = express();
 
 /** 
  * For GET  - req.params req.query
@@ -15,9 +14,9 @@ export const router = express();
  */
 
 /**
- * 
+ * Consultar a un usuario
  */
-router.get('/users', async (req, res) => {
+appGetRouter.get('/users', async (req, res) => {
     try {
         const filter = req.query.email?{
             email: req.query.email.toString(),
@@ -39,23 +38,9 @@ router.get('/users', async (req, res) => {
 
 
 /**
- * Crear un nuevo usuario para bbdd
- */
-router.post('/users', async (req, res) => {
-    try{
-        // guardar el usuario en el bbdd
-        const newUser = await User.create(req.body);
-        res.status(201).json(newUser);
-    } catch (err) {
-        res.status(400).send({ error: 'This email account is already in exist.'})
-    }
-})
-
-
-/**
  * Consultar un producto desde la bbdd
  */
-router.get('/products', async (req, res) => {
+appGetRouter.get('/products', async (req, res) => {
     try {
         const filter = req.query.name?{
             name: req.query.name.toString(),
@@ -72,26 +57,5 @@ router.get('/products', async (req, res) => {
         }
     } catch (error) {
         return res.status(500).send();
-    }
-})
-
-
-// Crear un nuevo producto
-router.post('/products', multer.single('file') , async (req, res, next) => {
-    try {
-        console.log('Here')
-        const newProduct = new Product({
-            name: req.body.name,
-            type: req.body.type,
-            stock: req.body.stock,
-            formOfSale: req.body.formOfSale,
-            pricePerOne: req.body.pricePerOne,
-            imagePath: req.file?.path
-        });
-        const product = await newProduct.save();
-        console.log(product);
-        res.status(201).json(product);
-    } catch (err) {
-        res.status(400).send({ error: 'Ya existe este img.'})
     }
 })

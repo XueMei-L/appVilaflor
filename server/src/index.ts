@@ -6,8 +6,8 @@ import morgan from 'morgan'
 // import path from 'path'
 
 
-import { router } from './routes/get';
-// import {postRouter} from './routers/post';
+import { appGetRouter } from './routes/get';
+import { appPostRouter } from './routes/post';
 
 // import {patchRouter} from './routers/patch';
 // import {deleteRouter} from './routers/delete';
@@ -21,8 +21,9 @@ app.use(cors());
 app.use(morgan('dev'))
 
 // para accerder a la bbdd usando GET POST DELETE
-app.use(router);
+app.use(appGetRouter);
 app.use(defaultRouter);
+app.use(appPostRouter);
 // app.use(postRouter);
 // app.use(patchRouter);
 // app.use(deleteRouter);
