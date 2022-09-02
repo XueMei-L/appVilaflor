@@ -19,7 +19,7 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">FRUTAS Y VEGETALES</div>
-          <router-link to = "/menu_section/frutas">
+          <router-link to = "/menu_section/addFrutas">
           <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
           </router-link>
       </div>

@@ -172,7 +172,7 @@ export default {
 .page-background {
   width:80%;
   height:100%;
-  background-color:#e4e4e4;
+  /* background-color:#e4e4e4; */
   display: flex;
   justify-content:center;
   padding:10px;

@@ -57,8 +57,6 @@ export default {
       infoName: null,
       infoFormOfSale: null,
       infoPricePerOne: null
-      // showProductName: null,
-      // src:''
     }
   },
 
@@ -128,6 +126,13 @@ export default {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   border-radius:10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.page-background .responsive{
+  /* display: inline; */
+  display: inline-block;
 }
 
 .page-background h1 {

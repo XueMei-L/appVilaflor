@@ -58,19 +58,6 @@ appGetRouter.get('/product', async (req, res) => {
         } else {
             return res.status(404).send();
         }
-        // const ImgPath = product[0]['imagePath']
-
-        // fs.readFile(ImgPath, function(err, data) {
-        //     console.log('find')
-        //     if (err) throw err; // Fail if the file can't be read.
-        //     res.setHeader("Content-Type", "image/jpg");
-        //     // res.setHeader('Content-Type', 'application/json');
-        //     // res.send(product);
-        //     // res.write(product)
-        //     res.write(data);
-        //     // res.write(JSON.stringify(product));
-        //     res.end('ok');
-        //   });
 
     } catch (error) {
         return res.status(500).send();
@@ -90,6 +77,7 @@ appGetRouter.get('/files', async(req, res) => {
         // console.log('find')
         // console.log(product[0]['imagePath'])
 
+        // read image file and send to cliet
         const ImgPath = product[0]['imagePath']
         fs.readFile(ImgPath, function(err, data) {
             console.log('find')
