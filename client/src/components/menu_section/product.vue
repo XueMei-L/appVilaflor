@@ -19,10 +19,9 @@
 
     <!-- <button @click="loadImg('NARANJA')" class="button" style="margin-bottom:10px;">show</button> -->
 
-    <button v-on:click="loadImg" class="button" style="margin-bottom:10px;">show</button>
+    <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button>
     <div class="page-background">
     <p id='show' v-html="htmlData"></p>
-
         <!-- responsive correspondiente al tamano de foto -->
         <!-- <div class="responsive"> -->
         <!-- <div class="polaroid"> -->
@@ -54,7 +53,10 @@ export default {
 
   data () {
     return {
-      htmlData: ''
+      htmlData: '',
+      infoName: null,
+      infoFormOfSale: null,
+      infoPricePerOne: null
       // showProductName: null,
       // src:''
     }
@@ -66,66 +68,45 @@ export default {
       this.$router.back(-1)
     },
 
-    async loadImg () {
-      // try {
-      //   await axios.get(`http://localhost:8081/products`,
-      //     {
-
-      //     // responseType: 'arraybuffer'
-      //     }).then(res => {
-      //     // return 'data:image/jpg;base64,' + btoa(
-      //     //   new Uint8Array(response.data)
-      //     //     .reduce((data, byte) => data + String.fromCharCode(byte), '')
-      //     // )
-      //     consoleelement.log(res)
-      //   })
-      //   // .then(data => {
-      //   //   console.log('eeeeeeeee')
-      //   //   this.src = data
-      //   // })
-      // } catch (err) {
-      //   console.log(err)
-      // }
+    async infoProduct () {
       try {
         await axios.get(`http://localhost:8081/products`, {
         }).then(res => {
-          // console.log(res)
           var a = res.data
-          const init = '<div class="responsive">' +
-          '<div class="polaroid">'
-
-          a.forEach((element, index) => {
-            console.log(index)
-            this.htmlData += init
-            this.add(element['name'])
+          // Recorrer todos los productos
+          a.forEach((element) => {
+            this.add(element['name'], element['formOfSale'], element['pricePerOne'], element['name'])
           })
-          console.log(res)
         })
       } catch (err) {
         console.log(err)
       }
     },
 
-    async add (name) {
-      // var name = 'NARANJA'
+    async add (nombre, forma, precio, name) {
       console.log(name)
+      const init = '<div class="responsive">' +
+          '<div class="polaroid">'
       const fin = '</div></div>'
       try {
         await axios({
-          // url: 'http://localhost:8081/products/?name=NARANJA',
           url: `http://localhost:8081/files/?name=${name}`,
           responseType: 'blob',
           methods: 'get'
         }).then(res => {
+          // Obtener imagen como objeto blob
           var blob = new Blob([res.data], {type: 'image/jpg'})
           var url = window.URL.createObjectURL(blob)
-          // this.src = url
 
-          // console.log('sss')
-          console.log(res)
+          // Mostrar la informacion con tipo html
+          this.htmlData += init
           this.htmlData += '<img src=' + url + '>'
+          this.htmlData += '<p>' + forma + '</p>' +
+                        '<h1>' + nombre + '<h1>' +
+                        '<b>' + precio + '€/Kg </b><br>' +
+                        '<button class="button" v-on:click ="addProduct"> Añadir </button>'
           this.htmlData += fin
-          console.log('ss')
+          // console.log('ss')
         })
       } catch (err) {
         console.log(err)
@@ -141,17 +122,12 @@ export default {
 </script>
 <style>
 
-/* div.polaroid {
-  width: 250px;
-  text-align: center;
-} */
-
 .page-background .polaroid {
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  width: 250px;
   background-color:#ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
   border-radius:10px;
-  width:300px;
-  height:300px
 }
 
 .page-background h1 {
@@ -227,7 +203,7 @@ export default {
 }
 
 .page-background img {
-  width:90%;
+  width: 90%;
   margin:10px;
   border-radius:10px;
 }
