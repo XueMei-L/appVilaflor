@@ -137,6 +137,7 @@ export default {
         })
 
         alert(`Agregado el nuevo producto (${this.productName})`)
+        this.$router.push('/menu_section/addFrutas')
       } catch (err) {
         console.log(err)
       }

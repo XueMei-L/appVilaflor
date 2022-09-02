@@ -7,8 +7,9 @@ import Home from '@/components/Home'
 import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
 import Frutas from '@/components/menu_section/frutas'
-// import Pescados from '@/components/menu_section/pescados'
+// import Pescados from '@/components/menu_section/pescados'ç
 import AddFrutas from '@/components/menu_section/addFrutas'
+import Product from '@/components/menu_section/product'
 
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
@@ -56,6 +57,12 @@ export default new Router({
       path: '/menu_section/addFrutas',
       name: 'addFrutas',
       component: AddFrutas
+    },
+
+    {
+      path: '/menu_section/product',
+      name: 'product',
+      component: Product
     },
 
     // seccion de footer

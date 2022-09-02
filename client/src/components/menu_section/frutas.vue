@@ -12,27 +12,55 @@
   </head>
 
   <body>
-    <!-- El modelo del fondo -->
-    <div class="container_main" align=center style="background-color:#ebeef3;">
-    <br><p style="font-size:50px;">FRUTAS Y VEGETALES</p><br>
-    <div><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
-
-    <div class="page-background">
+  <div class="page-background-0">
         <!-- responsive correspondiente al tamano de foto -->
         <div class="responsive">
         <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
-            <router-link to = "/menu_section/addFrutas">
-            <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
-            </router-link>
-            <!-- <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p> -->
-            <!-- <b>Agregar una nueva fruta o vegetal</b><br><br> -->
-            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar una nueva fruta o vegetal</b><br><br>
-            <button class="button" style="margin-bottom:10px;">Agregar</button>
+            <a target="_self" href="/fruits">
+            <img src="../imagenes/f1.jpg" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </a>
+            <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p>
+            <b>MANZANAS ROJAS</b><br><br>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">2,29 €/Kg</b><br><br>
+            <button @click="AddProduct" class="button" style="margin-bottom:10px;">Añadir</button>
         </div>
         </div>
 
-    </div>
+        <div class="responsive">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
+            <a target="_self" href="/fruits">
+            <img src="../imagenes/f2.jpg" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </a>
+            <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p>
+            <b>MANZANAS</b><br><br>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">2,29 €/Kg</b><br><br>
+            <button @click="AddProduct" class="button" style="margin-bottom:10px;">Añadir</button>
+        </div>
+        </div>
 
+        <div class="responsive">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
+            <a target="_self" href="/fruits">
+            <img src="../imagenes/f3.jpg" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </a>
+            <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p>
+            <b>MANZANAS</b><br><br>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">2,29 €/Kg</b><br><br>
+            <button @click="AddProduct" class="button" style="margin-bottom:10px;">Añadir</button>
+        </div>
+        </div>
+
+        <div class="responsive">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
+            <a target="_self" href="/fruits">
+            <img src="../imagenes/f4.jpg" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </a>
+            <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p>
+            <b>MANZANAS</b><br><br>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">2,29 €/Kg</b><br><br>
+            <button @click="AddProduct" class="button" style="margin-bottom:10px;">Añadir</button>
+        </div>
+        </div>
     </div>
   </body>
 </div>
@@ -56,12 +84,23 @@ export default {
   }
 }
 </script>
+
 <style>
 
 div.polaroid {
   width: 250px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
+}
+
+.page-background-0 {
+  width:80%;
+  height:100%;
+  background-color:#e4e4e4;
+  display: flex;
+  justify-content:center;
+  padding:10px;
+  border-radius: 10px;
 }
 
 </style>

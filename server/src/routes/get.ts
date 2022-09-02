@@ -1,7 +1,10 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import express from 'express';
+import express, { json } from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
+import fs from 'fs-extra';
 
 export const appGetRouter = express();
 
@@ -11,11 +14,11 @@ export const appGetRouter = express();
  */
 
 /**
- * Consultar a un usuario
+ * Consultar a un usuario -FINISHED
  */
 appGetRouter.get('/users', async (req, res) => {
     try {
-        const filter = req.query.email?{
+        const filter = req.query.email? {
             email: req.query.email.toString(),
         }:{};
         const user = await User.find(filter);
@@ -34,12 +37,15 @@ appGetRouter.get('/users', async (req, res) => {
 })
 
 
+
+
 /**
- * Consultar un producto desde la bbdd
+ * Consultar un producto desde la bbdd - FINISHED
  */
-appGetRouter.get('/products', async (req, res) => {
+appGetRouter.get('/product', async (req, res) => {
+    console.log('1111111111111')
     try {
-        const filter = req.query.name?{
+        const filter = req.query.name? {
             name: req.query.name.toString(),
         }:{};
         const product = await Product.find(filter);
@@ -52,7 +58,121 @@ appGetRouter.get('/products', async (req, res) => {
         } else {
             return res.status(404).send();
         }
+        // const ImgPath = product[0]['imagePath']
+
+        // fs.readFile(ImgPath, function(err, data) {
+        //     console.log('find')
+        //     if (err) throw err; // Fail if the file can't be read.
+        //     res.setHeader("Content-Type", "image/jpg");
+        //     // res.setHeader('Content-Type', 'application/json');
+        //     // res.send(product);
+        //     // res.write(product)
+        //     res.write(data);
+        //     // res.write(JSON.stringify(product));
+        //     res.end('ok');
+        //   });
+
     } catch (error) {
+        return res.status(500).send();
+    }
+})
+
+
+appGetRouter.get('/files', async(req, res) => {
+    
+    // try {
+    //     const filter = req.query.name? {
+    //         name: req.query.name.toString(),
+    //     }:{};
+    //     const product = await Product.find(filter);
+
+    //     // forma de encontrar dato concreto
+    //     console.log(product[0]['imagePath'])
+
+    //     const ImgPath = product[0]['imagePath']
+
+    //     fs.readFile(ImgPath, function(err, data) {
+    //         console.log('find')
+    //         if (err) throw err; // Fail if the file can't be read.
+    //         res.setHeader("Content-Type", "image/jpg");
+    //         // res.setHeader('Content-Type', 'application/json');
+    //         // res.write(product)
+    //         res.write(data);
+    //         // res.write(JSON.stringify(product));
+    //         res.end('ok');
+    //       });
+
+    try {
+        console.log(req.query.name)
+        const filter = req.query.name? {
+            name: req.query.name.toString(),
+        }:{};
+        const product = await Product.find(filter);
+        console.log('find')
+        console.log(product[0]['imagePath'])
+
+        // res.render('index', {
+        //     msg: 'File ok',
+        //     file: `${product[0]['imagePath']}`
+        // })
+    
+        const ImgPath = product[0]['imagePath']
+        fs.readFile(ImgPath, function(err, data) {
+            console.log('find')
+            if (err) throw err; // Fail if the file can't be read.
+            res.setHeader("Content-Type", "image/jpg");
+            // res.setHeader('Content-Type', 'application/json');
+            // res.write(product)
+            res.write(data);
+            // res.write(JSON.stringify(product));
+            res.end('ok');
+          });
+          
+    } catch (error) {
+        return res.status(500).send();
+    }
+})
+
+
+/**
+ * Consultar a todos productos
+ */
+appGetRouter.get('/products',async (req, res) => {
+
+    try {
+        // let htmlData = '';
+        const allProduct = await Product.find();
+        // allProduct.forEach((element) => {
+        //     const ImgPath = element['imagePath']
+        //     console.log('3333333')
+
+        //     fs.readFile(ImgPath, async function(err, data) {
+        //         htmlData += `<img src =`
+        //         console.log('find')
+        //         // console.log(data)
+        //         // console.log(htmlData)
+        //         // res.setHeader("Content-Type", "text/html");
+        //         // res.write(htmlData)
+        //         // if (err) throw err; // Fail if the file can't be read.
+        //         // // res.setHeader('Content-Type', 'application/json');
+        //         // // res.write(product)
+        //         res.write(htmlData)
+        //         res.write(data);
+        //         // // return data
+        //         // // res.write(JSON.stringify(product));
+        //         res.end('ok');
+        //     });
+            
+        //     // console.log(element['name'])
+        //     // htmlData += '<img src="' + img + '">'
+        //     // htmlData += '<p>' + element['formOfSale'] + '</p>' +
+        //     //             '<h1>' + element['name'] + '<h1>' +
+        //     //             '<b>' + element['pricePerOne'] + '€/Kg </b><br><br>' +
+        //     //             '<button class="button" v-on:click ="addProduct"> Añadir </button>'
+        //     // htmlData += fin
+        // })
+        return res.json(allProduct)
+    } catch (err) {
         return res.status(500).send();
     }
 })

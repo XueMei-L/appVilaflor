@@ -14,7 +14,7 @@ appPostRouter.post('/users', async (req, res) => {
   try{
       // guardar el usuario en el bbdd
       const newUser = new User({
-          username: req.body.name,
+          username: req.body.username,
           email: req.body.email,
           password: req.body.password,
       });
@@ -43,6 +43,6 @@ appPostRouter.post('/products', multer.single('file') , async (req, res) => {
         console.log(product);
         res.status(201).json(product);
     } catch (err) {
-        res.status(400).send({ error: 'Ya existe este img.'})
+        res.status(400).send({ error: 'Ya existe este producto.'})
     }
 })
