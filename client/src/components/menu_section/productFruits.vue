@@ -17,9 +17,17 @@
     <br><p style="font-size:50px;">FRUTAS Y VEGETALES</p><br>
     <div align='left' style="position: static; margin-left:16%"><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
 
-    <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button>
-    <div class="page-background">
-      <p id='show' v-html="htmlData"></p>
+    <!-- <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button> -->
+    <div class="page-background" v-bind:key="p.id" v-for="(p, index) in products">
+      <div class="responsive" style="display: inline-block;">
+          <div class="polaroid" style="display: inline-block;">
+            <img :src="src[index]">
+            <p>{{ p.formOfSale }}</p>
+            <h1>{{ p.name }}</h1>
+            <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
+            <button class="button" v-on:click=addProduct(p.name)>Añadir</button>
+        </div>
+      </div>
     </div>
 
     </div>
@@ -29,7 +37,6 @@
 </template>
 
 <script>
-// import Api from '../../services/Api'
 import axios from 'axios'
 
 export default {
@@ -39,7 +46,9 @@ export default {
       htmlData: '',
       infoName: null,
       infoFormOfSale: null,
-      infoPricePerOne: null
+      infoPricePerOne: null,
+      products: [],
+      src: []
     }
   },
 
@@ -48,58 +57,72 @@ export default {
     back () {
       this.$router.back(-1)
     },
-
-    addProduct () {
-      console.log('hello')
+    addProduct (name) {
+      alert('add' + name)
     },
-
-    async infoProduct () {
-      try {
-        await axios.get(`http://localhost:8081/products`, {
-        }).then(res => {
-          var a = res.data
-          // Recorrer todos los productos
-          a.forEach((element) => {
-            this.add(element['name'], element['formOfSale'], element['pricePerOne'], element['name'])
-          })
-        })
-      } catch (err) {
-        console.log(err)
-      }
-    },
-
-    async add (nombre, forma, precio, name) {
-      const init = '<div class="responsive">' +
-          '<div class="polaroid">'
-      const fin = '</div></div>'
+    async add (name) {
       try {
         await axios({
           url: `http://localhost:8081/files/?name=${name}`,
           responseType: 'blob',
           methods: 'get'
         }).then(res => {
+          console.log('here')
           // Obtener imagen como objeto blob
           var blob = new Blob([res.data], {type: 'image/jpg'})
           var url = window.URL.createObjectURL(blob)
-
-          // Mostrar la informacion con tipo html
-          this.htmlData += init
-          this.htmlData += '<img src=' + url + '>'
-          this.htmlData += '<p>' + forma + '</p>' +
-                        '<h1>' + nombre + '<h1>' +
-                        '<b>' + precio + '€/Kg </b><br>' +
-                        '<button class="button" v-on:click =' + this.addProduct() + '>Añadir </button>'
-          this.htmlData += fin
+          this.src.push(url)
         })
       } catch (err) {
         console.log(err)
       }
-    },
-
-    beforeMount () {
-      this.infoProduct()
     }
+  },
+
+  // Antes de montar la pagina. autocarga
+  mounted () {
+    axios
+      .get('http://localhost:8081/products')
+      .then((response) => {
+        this.products = response.data
+        console.log(this.products)
+        this.products.forEach(element => {
+          this.add(element['name'])
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
+
+  // async add (nombre, forma, precio, name) {
+  //   const init = '<div class="responsive">' +
+  //       '<div class="polaroid">'
+  //   const fin = '</div></div>'
+  //   try {
+  //     await axios({
+  //       url: `http://localhost:8081/files/?name=${name}`,
+  //       responseType: 'blob',
+  //       methods: 'get'
+  //     }).then(res => {
+  //       // Obtener imagen como objeto blob
+  //       var blob = new Blob([res.data], {type: 'image/jpg'})
+  //       var url = window.URL.createObjectURL(blob)
+
+  //       // Mostrar la informacion con tipo html
+  //       this.htmlData += init
+  //       this.htmlData += '<img src=' + url + '>'
+  //       this.htmlData += '<p>' + forma + '</p>' +
+  //                     '<h1>' + nombre + '<h1>' +
+  //                     '<b>' + precio + '€/Kg </b><br>' +
+  //                     '<button class="button" v-on:click =' + this.addProduct() + '>Añadir </button>'
+  //       this.htmlData += fin
+  //     })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
 }
 </script>
 <style>
@@ -120,7 +143,7 @@ export default {
 
 .page-background h1 {
   color: black;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
 }
 

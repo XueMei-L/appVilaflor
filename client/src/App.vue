@@ -8,7 +8,7 @@
 
     <div class="home-page">
       <!-- <p>{{username}}</p> -->
-      <input class="seach_box" type="text" @keyup="mounted"  placeholder="Search">
+      <input class="seach_box" type="text"  placeholder="Search">
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
@@ -98,18 +98,25 @@
       Todos los nombres de productos, logotipos, marcas, marcas comerciales y marcas comerciales registradas son propiedad de sus respectivos dueños. Todos los nombres de empresas, productos y servicios utilizados en este sitio web tienen únicamente fines de identificación.
       </p>
     </div>
+
+    <h1>Products</h1>
+
     </footer>
   </div>
 </template>
 
 <script>
+
 export default {
+
   name: 'App',
 
   data () {
     return {
       seachResult: ''
     }
+  },
+  methods: {
   }
 
   // methods: {
