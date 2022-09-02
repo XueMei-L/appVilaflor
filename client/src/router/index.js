@@ -6,10 +6,10 @@ import Register from '@/components/Register'
 import Home from '@/components/Home'
 import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
-import Frutas from '@/components/menu_section/frutas'
-// import Pescados from '@/components/menu_section/pescados'ç
-import AddFrutas from '@/components/menu_section/addFrutas'
-import Product from '@/components/menu_section/product'
+import ProductFruits from '@/components/menu_section/productFruits'
+// import Pescados from '@/components/menu_section/pescados'
+// import AddFrutas from '@/components/menu_section/addFrutas'
+// import Product from '@/components/menu_section/product'
 
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
@@ -43,9 +43,9 @@ export default new Router({
 
     // seccion de menu
     {
-      path: '/menu_section/frutas',
-      name: 'frutas',
-      component: Frutas
+      path: '/menu_section/productFruits',
+      name: 'ProductFruits',
+      component: ProductFruits
     },
     // {
     //   path: '/menu_section/pescados',
@@ -53,17 +53,17 @@ export default new Router({
     //   component: Pescados
     // },
 
-    {
-      path: '/menu_section/addFrutas',
-      name: 'addFrutas',
-      component: AddFrutas
-    },
+    // {
+    //   path: '/menu_section/addFrutas',
+    //   name: 'addFrutas',
+    //   component: AddFrutas
+    // },
 
-    {
-      path: '/menu_section/product',
-      name: 'product',
-      component: Product
-    },
+    // {
+    //   path: '/menu_section/product',
+    //   name: 'product',
+    //   component: Product
+    // },
 
     // seccion de footer
     {

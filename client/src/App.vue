@@ -7,10 +7,10 @@
     </div>
 
     <div class="home-page">
-      <input class="seach_box" type="text" placeholder="Seach">
+      <!-- <p>{{username}}</p> -->
+      <input class="seach_box" type="text" @keyup="mounted"  placeholder="Search">
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/Register">Register</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
         <li><router-link to="/menu_section/frutas">Producto</router-link></li>
         <li><router-link to="/menu_section/product">Pedido</router-link></li>
@@ -104,8 +104,33 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  data () {
+    return {
+      seachResult: ''
+    }
+  }
+
+  // methods: {
+  //   // setup () {
+  //   //   function search (e) {
+  //   //     var search = e.target.value.trim()
+  //   //     console.log(search)
+  //   //   }
+  //   //   return {search}
+  //   // },
+  // },
+  // mounted () {
+  //   window.addEventListener('keyup', event => {
+  //     if (event.key === 13 || event.key === 'Enter') {
+  //       console.log('ee')
+  //     }
+  //   }
+  //   )
+  // }
 }
+
 </script>
 
 <style>
@@ -163,8 +188,8 @@ export default {
 /* NAVEGADOR ------------------------------------------------------------------------------------------------------------------*/
 /* Otros elementos */
 .seach_box {
-  position:absolute;
-  right:10%;
+  position: relative;
+  left:25%;
   top: 14%;
   border-radius: 6px;
 }

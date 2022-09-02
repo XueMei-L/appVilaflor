@@ -1,7 +1,4 @@
-/* eslint-disable prefer-const */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import express, { json } from 'express';
+import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';
 import fs from 'fs-extra';
@@ -14,20 +11,24 @@ export const appGetRouter = express();
  */
 
 /**
- * Consultar a un usuario -FINISHED
+ * Consultar a un usuario -FINISHED - LOGIN
  */
 appGetRouter.get('/users', async (req, res) => {
+    console.log(req.query.password)
     try {
         const filter = req.query.email? {
             email: req.query.email.toString(),
         }:{};
         const user = await User.find(filter);
 
-        // forma de encontrar dato concreto
-        console.log(user[0]['username'])
-
         if (user.length !== 0) {
-            return res.send(user);
+            if(req.query.password !== user[0].password) {
+                res.status(403).send({
+                    error: 'The login information was incorrect'
+                })
+            } else {
+                return res.status(200).send(user)
+            }
         } else {
             return res.status(404).send();
         }
@@ -35,8 +36,6 @@ appGetRouter.get('/users', async (req, res) => {
         return res.status(500).send();
     }
 })
-
-
 
 
 /**
@@ -69,13 +68,10 @@ appGetRouter.get('/product', async (req, res) => {
  */
 appGetRouter.get('/files', async(req, res) => {
     try {
-        console.log(req.query.name)
         const filter = req.query.name? {
             name: req.query.name.toString(),
         }:{};
         const product = await Product.find(filter);
-        // console.log('find')
-        // console.log(product[0]['imagePath'])
 
         // read image file and send to cliet
         const ImgPath = product[0]['imagePath']
@@ -94,7 +90,7 @@ appGetRouter.get('/files', async(req, res) => {
 
 
 /**
- * Consultar a todos productos
+ * Consultar a todos los productos
  */
 appGetRouter.get('/products',async (req, res) => {
     try {

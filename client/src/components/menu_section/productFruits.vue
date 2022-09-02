@@ -15,28 +15,11 @@
     <!-- El modelo del fondo -->
     <div class="container_main" align=center style="background-color:#ebeef3;">
     <br><p style="font-size:50px;">FRUTAS Y VEGETALES</p><br>
-    <div><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
-
-    <!-- <button @click="loadImg('NARANJA')" class="button" style="margin-bottom:10px;">show</button> -->
+    <div align='left' style="position: static; margin-left:16%"><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
 
     <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button>
     <div class="page-background">
-    <p id='show' v-html="htmlData"></p>
-        <!-- responsive correspondiente al tamano de foto -->
-        <!-- <div class="responsive"> -->
-        <!-- <div class="polaroid"> -->
-            <!-- <p id='show' v-html="src"></p> -->
-            <!-- <router-link to = "/Menu">
-              <img src="../imagenes/f1.jpg" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
-            </router-link>
-            <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p>
-            <b>MANZANAS ROJAS</b><br><br>
-            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">2,29 €/Kg</b><br><br>
-            <button @click="addProduct" class="button" style="margin-bottom:10px;">Añadir</button> -->
-        <!-- </div> -->
-        <!-- </div> -->
-        <!-- <img style="width: 100%;" class="pointer" src=" "> -->
-
+      <p id='show' v-html="htmlData"></p>
     </div>
 
     </div>
@@ -66,6 +49,10 @@ export default {
       this.$router.back(-1)
     },
 
+    addProduct () {
+      console.log('hello')
+    },
+
     async infoProduct () {
       try {
         await axios.get(`http://localhost:8081/products`, {
@@ -82,7 +69,6 @@ export default {
     },
 
     async add (nombre, forma, precio, name) {
-      console.log(name)
       const init = '<div class="responsive">' +
           '<div class="polaroid">'
       const fin = '</div></div>'
@@ -102,18 +88,16 @@ export default {
           this.htmlData += '<p>' + forma + '</p>' +
                         '<h1>' + nombre + '<h1>' +
                         '<b>' + precio + '€/Kg </b><br>' +
-                        '<button class="button" v-on:click ="addProduct"> Añadir </button>'
+                        '<button class="button" v-on:click =' + this.addProduct() + '>Añadir </button>'
           this.htmlData += fin
-          // console.log('ss')
         })
       } catch (err) {
         console.log(err)
       }
-      console.log(this.htmlData)
     },
 
-    addProduct () {
-      alert('Producto añadido.')
+    beforeMount () {
+      this.infoProduct()
     }
   }
 }
@@ -127,7 +111,6 @@ export default {
   text-align: center;
   border-radius:10px;
   margin-bottom: 10px;
-  margin-right: 10px;
 }
 
 .page-background .responsive{

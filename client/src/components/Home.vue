@@ -64,19 +64,22 @@ export default {
 
   methods: {
     async CheckUser () {
-      await axios
-        .get(`http://localhost:8081/users?email=${this.emailLogin}&password=${this.passwordLogin}`)
-        // .get(`http://localhost:8081/users?email="111@gmail.com"&password="111111"`)
-        .then((response) => {
-          alert(`Inicio de seccion correcto`)
-          // salto de pagina
-          this.$router.push('/Menu')
-          var parsedobj = JSON.parse(JSON.stringify(response))
-          console.log(parsedobj.data[0]['username'])
-        }, (err) => {
-          this.loginmsg = 'Confima que el email o la contraseña esta bien correcta.'
-          console.log(err)
-        })
+      if (!this.passwordLogin || !this.emailLogin) {
+        this.loginmsg = 'Rellenas datos necesarios para hacer login'
+      } else {
+        await axios
+          .get(`http://localhost:8081/users?email=${this.emailLogin}&password=${this.passwordLogin}`)
+          .then((response) => {
+            // salto de pagina
+            alert(`Inicio de seccion correcto`)
+            this.$router.push('/Menu')
+            var parsedobj = JSON.parse(JSON.stringify(response))
+            console.log(parsedobj.data[0]['username'])
+          }, (err) => {
+            this.loginmsg = 'Confima que el email o la contraseña esta bien correcta.'
+            console.log(err)
+          })
+      }
     }
   }
 }
