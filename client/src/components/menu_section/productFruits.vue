@@ -28,6 +28,19 @@
             <button class="button" v-on:click=addProduct(p.name)>Añadir</button>
         </div>
       </div>
+       <div class="responsive">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
+            <router-link to = "/menu_section/addFrutas">
+            <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </router-link>
+            <!-- <p align="left" style="margin-left:5px; margin-bottom:10px; color:#B2B2B2;">Por precio/Kilo</p> -->
+            <!-- <b>Agregar una nueva fruta o vegetal</b><br><br> -->
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar una nueva fruta o vegetal</b><br><br>
+            <router-link to = "/menu_section/addFrutas">
+            <button class="button" style="margin-bottom:10px;">Agregar</button>
+            </router-link>
+        </div>
+        </div>
 
     </div>
 
