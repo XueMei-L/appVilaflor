@@ -1,5 +1,15 @@
 <template>
-  <div id="app">
+<div id="app">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Fruits</title>
+
+    </head>
     <div>
       <a target="_self" href="/">
       <img src="./components/imagenes/logo.jpg" alt="foto de frutas" style="width:80px">
@@ -9,6 +19,9 @@
     <div class="home-page">
       <!-- <p>{{username}}</p> -->
       <input class="seach_box" type="text"  placeholder="Search">
+      <router-link to>
+      <button class="seach_box">search</button>
+      </router-link>
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
@@ -178,7 +191,8 @@ export default {
   position: relative;
   left:25%;
   top: 14%;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding: 5px;
 }
 /* FOOTER ------------------------------------------------------------------------------------------------------------------*/
 .page-background {
@@ -359,4 +373,5 @@ export default {
   color:red;
   font-size: 0.7rem;
 }
+
 </style>
