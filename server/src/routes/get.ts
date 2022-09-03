@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import express from 'express';
 import { User } from '../models/user';
 import { Product } from '../models/products';

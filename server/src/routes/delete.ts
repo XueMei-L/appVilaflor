@@ -14,6 +14,24 @@ export const appDeleteRouter = express();
  * For POST - req.body
  */
 
+ appDeleteRouter.delete('/users', async (req, res) => {
+  if (!req.query.email) {
+    return res.status(400).send({
+      error: 'A email must be provided',
+    });
+  }
+
+  try {
+    // filtra para encontrar el objecto
+    const userDelete = await User.findOneAndDelete({email: req.query.email.toString()});
+
+    return res.send(userDelete);
+  } catch (error) {
+    res.status(400).send();
+  }
+});
+
+
 /**
  * Eliminar un producto
  */

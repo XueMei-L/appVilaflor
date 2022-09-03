@@ -7,6 +7,7 @@ import {Document, Schema, model} from 'mongoose';
     username: string,
     email: string,
     password: string,
+    type: string,
     pedido: string[]
   }
   
@@ -26,6 +27,10 @@ const UserSchema = new Schema({
         type: String,
         require: true,
         // match: RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,}$/)
+    },
+    type: {
+        type: String,
+        require: true,
     },
     pedido: {
         type: [String],

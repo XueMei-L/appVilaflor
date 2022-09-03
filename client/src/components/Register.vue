@@ -74,7 +74,7 @@ export default {
       if (checkuser && checkemail && checkpassword) {
         console.log('sss')
         axios
-          .post('http://localhost:8081/users', {
+          .post('http://localhost:8081/register', {
             username: this.username,
             email: this.email,
             password: this.password
