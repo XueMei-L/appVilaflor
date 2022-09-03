@@ -8,7 +8,7 @@ import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
 import ProductFruits from '@/components/menu_section/productFruits'
 // import Pescados from '@/components/menu_section/pescados'
-// import AddFrutas from '@/components/menu_section/addFrutas'
+import AddFrutas from '@/components/menu_section/addFrutas'
 // import Product from '@/components/menu_section/product'
 
 import SearchPage from '@/components/searchResult'
