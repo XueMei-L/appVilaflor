@@ -11,6 +11,8 @@ import ProductFruits from '@/components/menu_section/productFruits'
 // import AddFrutas from '@/components/menu_section/addFrutas'
 // import Product from '@/components/menu_section/product'
 
+import SearchPage from '@/components/searchResult'
+
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
 import AvisoLegal from '@/components/footer/aviso_legal'
@@ -39,6 +41,12 @@ export default new Router({
       path: '/contact',
       name: 'Contact',
       component: Contact
+    },
+
+    {
+      path: '/search',
+      name: 'Search',
+      component: SearchPage
     },
 
     // seccion de menu

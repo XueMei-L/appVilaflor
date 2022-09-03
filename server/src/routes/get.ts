@@ -100,3 +100,26 @@ appGetRouter.get('/products',async (req, res) => {
         return res.status(500).send();
     }
 })
+
+/**
+ * Consultar algunos productos
+ */
+appGetRouter.get('/productSearch',async (req, res) => {
+    const a = JSON.stringify(req.query.name)
+    try {
+        let list:any = [];
+        const allProduct = await Product.find();
+        const p = a.replace(/"/g, "").toUpperCase()
+        allProduct.forEach(element => {
+            // console.log(element['name'])
+            if(element['name'].includes(p)) {
+                console.log(111)
+                list.push(element)
+            }
+        });
+            return res.status(200).send(list);
+    } catch (err) {
+        return res.status(500).send();
+    }
+})
+

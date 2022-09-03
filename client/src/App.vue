@@ -17,10 +17,9 @@
     </div>
 
     <div class="home-page">
-      <!-- <p>{{username}}</p> -->
-      <input class="seach_box" type="text"  placeholder="Search">
-      <router-link to>
-      <button class="seach_box">search</button>
+      <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
+      <router-link to ="/Search">
+      <button class="seach_box">Buscador</button>
       </router-link>
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
@@ -116,17 +115,37 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
-
   name: 'App',
 
   data () {
     return {
-      seachResult: ''
+      searchText: null,
+      msgSearch: null
     }
   },
   methods: {
+    async submitText () {
+      console.log(1)
+      console.log(this.searchText)
+      this.$router.push('/Search')
+      var name = this.searchText.toUpperCase()
+      try {
+        console.log('here')
+        await axios({
+          url: `http://localhost:8081/product?name=${name}`,
+          method: 'get'
+        }).then((res) => {
+          console.log('here2')
+          return res
+        })
+      } catch (err) {
+        this.msgSearch = `No existe el producto "${name}"`
+        console.log(err)
+        return this.msgSearch
+      }
+    }
   }
 
 }
@@ -188,11 +207,13 @@ export default {
 /* NAVEGADOR ------------------------------------------------------------------------------------------------------------------*/
 /* Otros elementos */
 .seach_box {
+  background: #ffffff;
   position: relative;
   left:25%;
-  top: 14%;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 /* FOOTER ------------------------------------------------------------------------------------------------------------------*/
 .page-background {
@@ -202,7 +223,6 @@ export default {
   display: flex;
   justify-content:center;
   padding:10px;
-  border-radius: 10px;
 }
 .footer-distributed {
   background: rgb(91, 88, 88);
