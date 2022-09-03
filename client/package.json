@@ -16,8 +16,12 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "vee-validate": "^2.2.15",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-router-sync": "^0.1.0",
+    "vuex": "^4.0.2",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
