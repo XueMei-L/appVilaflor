@@ -18,13 +18,14 @@
 
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
+      <button class="seach_box">{{username}}</button>
       <router-link to ="/Search">
       <button class="seach_box">Buscador</button>
       </router-link>
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
-        <li><router-link to="/menu_section/frutas">Producto</router-link></li>
+        <li><router-link to="/menu_section/edit">Producto</router-link></li>
         <li><router-link to="/menu_section/product">Pedido</router-link></li>
         <li><router-link to="/contact">Contacto</router-link></li>
         <p class="navegador"></p>
@@ -122,7 +123,8 @@ export default {
   data () {
     return {
       searchText: null,
-      msgSearch: null
+      msgSearch: null,
+      username: 'Login'
     }
   },
   methods: {

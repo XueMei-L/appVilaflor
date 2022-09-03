@@ -12,6 +12,7 @@ import ProductFruits from '@/components/menu_section/productFruits'
 // import Product from '@/components/menu_section/product'
 
 import SearchPage from '@/components/searchResult'
+import EditProduct from '@/components/menu_section/editProduct'
 
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
@@ -48,6 +49,11 @@ export default new Router({
       name: 'Search',
       component: SearchPage
     },
+    {
+      path: '/menu_section/edit',
+      name: 'Edit',
+      component: EditProduct
+    },
 
     // seccion de menu
     {
@@ -55,17 +61,18 @@ export default new Router({
       name: 'ProductFruits',
       component: ProductFruits
     },
+
     // {
     //   path: '/menu_section/pescados',
     //   name: 'pescados',
     //   component: Pescados
     // },
 
-    // {
-    //   path: '/menu_section/addFrutas',
-    //   name: 'addFrutas',
-    //   component: AddFrutas
-    // },
+    {
+      path: '/menu_section/addFrutas',
+      name: 'addFrutas',
+      component: AddFrutas
+    },
 
     // {
     //   path: '/menu_section/product',

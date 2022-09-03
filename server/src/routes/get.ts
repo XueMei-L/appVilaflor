@@ -107,7 +107,7 @@ appGetRouter.get('/products',async (req, res) => {
 appGetRouter.get('/productSearch',async (req, res) => {
     const a = JSON.stringify(req.query.name)
     try {
-        let list:any = [];
+        const list:any = [];
         const allProduct = await Product.find();
         const p = a.replace(/"/g, "").toUpperCase()
         allProduct.forEach(element => {

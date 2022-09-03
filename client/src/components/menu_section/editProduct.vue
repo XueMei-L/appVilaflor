@@ -25,9 +25,20 @@
             <p>{{ p.formOfSale }}</p>
             <h1>{{ p.name }}</h1>
             <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
-            <button class="button" v-on:click=addProduct(p.name)>Añadir</button>
+            <button class="button" v-on:click=addProduct(p.name)>Editar</button>
         </div>
       </div>
+      <div class="responsive">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
+            <router-link to = "/menu_section/addFrutas">
+            <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
+            </router-link>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar una nueva fruta o vegetal</b><br><br>
+            <router-link to = "/menu_section/addFrutas">
+            <button class="button" style="margin-bottom:10px;">Agregar</button>
+            </router-link>
+        </div>
+        </div>
     </div>
 
     </div>
@@ -96,8 +107,8 @@ export default {
   }
 }
 </script>
-<style>
 
+<style>
 .page-background .polaroid {
   width: 250px;
   background-color:#ffffff;
