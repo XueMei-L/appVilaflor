@@ -98,9 +98,6 @@
       Todos los nombres de productos, logotipos, marcas, marcas comerciales y marcas comerciales registradas son propiedad de sus respectivos dueños. Todos los nombres de empresas, productos y servicios utilizados en este sitio web tienen únicamente fines de identificación.
       </p>
     </div>
-
-    <h1>Products</h1>
-
     </footer>
   </div>
 </template>
@@ -119,23 +116,6 @@ export default {
   methods: {
   }
 
-  // methods: {
-  //   // setup () {
-  //   //   function search (e) {
-  //   //     var search = e.target.value.trim()
-  //   //     console.log(search)
-  //   //   }
-  //   //   return {search}
-  //   // },
-  // },
-  // mounted () {
-  //   window.addEventListener('keyup', event => {
-  //     if (event.key === 13 || event.key === 'Enter') {
-  //       console.log('ee')
-  //     }
-  //   }
-  //   )
-  // }
 }
 
 </script>
@@ -204,7 +184,7 @@ export default {
 .page-background {
   width:80%;
   height:100%;
-  /* background-color:#e4e4e4; */
+  background-color:#e4e4e4;
   display: flex;
   justify-content:center;
   padding:10px;
