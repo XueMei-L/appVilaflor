@@ -61,8 +61,6 @@ function jwtSignUser (user) {
 // login
 appPostRouter.post('/login', async (req, res) => {
     try {
-        // console.log(req.body.email)
-        // console.log(req.body.password)
         const {password} = req.body
         const user = await User.findOne({
           email: req.body.email.toString(),
