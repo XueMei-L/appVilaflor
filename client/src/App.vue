@@ -18,7 +18,7 @@
 
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
-      <button v-if="user" class="seach_box">Hi, {{user}}</button>
+      <button v-if="user" class="seach_box">Hi, {{user.username}}</button>
 
       <router-link to ="/Login">
       <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Login</button>
@@ -159,6 +159,7 @@ export default {
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
+      console.log('ddd')
       this.$router.push('/')
     }
   },

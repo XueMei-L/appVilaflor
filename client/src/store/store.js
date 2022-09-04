@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
+    admin: false,
     isUserLoggedIn: false
   },
   mutations: {
@@ -21,7 +22,6 @@ export default new Vuex.Store({
     },
     setUser (state, user) {
       state.user = user
-      console.log(state.user)
     },
     logout (state) {
       console.log('change')
