@@ -14,7 +14,7 @@
   <body>
     <!-- El modelo del fondo -->
     <div class="container_main" align=center style="background-color:#ebeef3;">
-    <br><p style="font-size:50px;">FRUTAS Y VEGETALES</p><br>
+    <br><p style="font-size:50px;">PERFUMES</p><br>
     <div align='left' style="position: static; margin-left:16%"><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
 
     <!-- <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button> -->
@@ -79,7 +79,7 @@ export default {
   // Antes de montar la pagina. autocarga
   mounted () {
     axios
-      .get('http://localhost:8081/products')
+      .get('http://localhost:8081/products?type=Perfumes')
       .then((response) => {
         this.products = response.data
         console.log(this.products)

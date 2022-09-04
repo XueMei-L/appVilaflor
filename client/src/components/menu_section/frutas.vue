@@ -34,7 +34,7 @@
             <router-link to = "/menu_section/addFrutas">
             <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
             </router-link>
-            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar una nueva fruta o vegetal</b><br><br>
+            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar un nuevo producto</b><br><br>
             <router-link to = "/menu_section/addFrutas">
             <button class="button" style="margin-bottom:10px;">Agregar</button>
             </router-link>

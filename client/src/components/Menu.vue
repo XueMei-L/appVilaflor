@@ -19,10 +19,10 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">FRUTAS Y VEGETALES</div>
-          <router-link to = "/menu_section/productsAdmin" v-if="$store.state.isUserLoggedIn">
+          <router-link to = "/menu_section/frutas" v-if="$store.state.isUserLoggedIn">
           <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
           </router-link>
-          <router-link to = "/menu_section/products" v-if="!$store.state.isUserLoggedIn">
+          <router-link to = "/menu_section/frutasNormal" v-if="!$store.state.isUserLoggedIn">
           <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
           </router-link>
       </div>
@@ -31,9 +31,12 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">PESCADOS</div>
-          <!-- <router-link to = "/menu_section/frutas"> -->
-          <img src="./imagenes/pescados.jpg" alt="foto de pescados" style="margin:10px; border-radius: 10px;">
-          <!-- <router-link to = "/menu_section/frutas"> -->
+          <router-link to = "/menu_section/pescados" v-if="$store.state.isUserLoggedIn">
+          <img src="./imagenes/pescados.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
+          </router-link>
+          <router-link to = "/menu_section/pescadosNormal" v-if="!$store.state.isUserLoggedIn">
+          <img src="./imagenes/pescados.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
+          </router-link>
       </div>
       </div>
     </div>
@@ -42,18 +45,24 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">CARNES</div>
-          <a target="_self" href="/carnes">
-          <img src="./imagenes/carnes.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
-          </a>
+          <router-link to = "/menu_section/carnes" v-if="$store.state.isUserLoggedIn">
+          <img src="./imagenes/carnes.jpg" alt="foto de carnes" style="margin:10px;border-radius: 10px;">
+          </router-link>
+          <router-link to = "/menu_section/carnesNormal" v-if="!$store.state.isUserLoggedIn">
+          <img src="./imagenes/carnes.jpg" alt="foto de carnes" style="margin:10px;border-radius: 10px;">
+          </router-link>
       </div>
       </div>
 
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">PERFUMES</div>
-          <a target="_self" href="#javascript">
-          <img src="./imagenes/perfumes.jpg" alt="foto de pescados" style="margin:10px;border-radius: 10px;">
-          </a>
+          <router-link to = "/menu_section/perfumes" v-if="$store.state.isUserLoggedIn">
+          <img src="./imagenes/perfumes.jpg" alt="foto de perfumes" style="margin:10px;border-radius: 10px;">
+          </router-link>
+          <router-link to = "/menu_section/perfumesNormal" v-if="!$store.state.isUserLoggedIn">
+          <img src="./imagenes/perfumes.jpg" alt="foto de perfumes" style="margin:10px;border-radius: 10px;">
+          </router-link>
       </div>
       </div>
     </div>

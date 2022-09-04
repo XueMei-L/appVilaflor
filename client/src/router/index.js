@@ -7,8 +7,14 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
-import Products from '@/components/menu_section/products'
-import ProductsAdmin from '@/components/menu_section/productsAdmin'
+import FrutasNormal from '@/components/menu_section/frutasNormal'
+import PescadosNormal from '@/components/menu_section/pescadosNormal'
+import PerfumesNormal from '@/components/menu_section/perfumesNormal'
+import CarnesNormal from '@/components/menu_section/carnesNormal'
+import Pescados from '@/components/menu_section/pescados'
+import Perfumes from '@/components/menu_section/perfumes'
+import Frutas from '@/components/menu_section/frutas'
+import Carnes from '@/components/menu_section/carnes'
 
 // import Pescados from '@/components/menu_section/pescados'
 import AddFrutas from '@/components/menu_section/addFrutas'
@@ -65,14 +71,44 @@ export default new Router({
 
     // seccion de menu
     {
-      path: '/menu_section/products',
-      name: 'products',
-      component: Products
+      path: '/menu_section/frutasNormal',
+      name: 'frutasNormal',
+      component: FrutasNormal
     },
     {
-      path: '/menu_section/productsAdmin',
-      name: 'productsAdmin',
-      component: ProductsAdmin
+      path: '/menu_section/pescadosNormal',
+      name: 'pescadosNormal',
+      component: PescadosNormal
+    },
+    {
+      path: '/menu_section/perfumesNormal',
+      name: 'perfumesNormal',
+      component: PerfumesNormal
+    },
+    {
+      path: '/menu_section/carnesNormal',
+      name: 'carnesNormal',
+      component: CarnesNormal
+    },
+    {
+      path: '/menu_section/frutas',
+      name: 'frutas',
+      component: Frutas
+    },
+    {
+      path: '/menu_section/pescados',
+      name: 'pescados',
+      component: Pescados
+    },
+    {
+      path: '/menu_section/carnes',
+      name: 'carnes',
+      component: Carnes
+    },
+    {
+      path: '/menu_section/perfumes',
+      name: 'perfumes',
+      component: Perfumes
     },
 
     // {
