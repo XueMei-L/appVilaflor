@@ -24,7 +24,7 @@
             <p style="color:black; font-size:20px; margin-top:30px;">{{ p[0].pricePerOne }} €</p>
             </div>
         </div>
-        <button class="button" style="margin-bottom:10px;" @click="buy">Comprar</button>
+        <button class="button" style="margin-bottom:10px;" v-on:click=buy(user.email)>Comprar</button>
       </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -50,12 +51,13 @@ export default {
     back () {
       this.$router.back(-1)
     },
-    async buy (email) {
+    async buy (user) {
+      // alert(user)
       this.shoppingCarInfor = null
       this.shoppingCar = null
       this.srcShoppingCar = null
       alert('Tu compra ha sido procesada')
-      await axios.patch(`http://localhost:8081/shop?email=${email}`)
+      await axios.patch(`http://localhost:8081/shop?email=${user}`)
     },
     async getShoppingCar (name) {
       try {
@@ -105,6 +107,10 @@ export default {
 
   mounted () {
     this.loadShoppingCart()
+  },
+
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 

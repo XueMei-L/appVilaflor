@@ -138,7 +138,7 @@ export default {
       ).then(res => {
         console.log(res)
       })
-      alert('add' + user + name)
+      alert('añadir ' + name)
     },
     async deleteProduct (name) {
       this.openWindows = false
