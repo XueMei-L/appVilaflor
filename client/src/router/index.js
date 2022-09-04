@@ -17,8 +17,8 @@ import Frutas from '@/components/menu_section/frutas'
 import Carnes from '@/components/menu_section/carnes'
 
 import AddProduct from '@/components/menu_section/addProduct'
-
 import SearchPage from '@/components/searchResult'
+import Pedido from '@/components/pedido'
 
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
@@ -103,11 +103,11 @@ export default new Router({
       component: Perfumes
     },
 
-    // {
-    //   path: '/menu_section/pescados',
-    //   name: 'pescados',
-    //   component: Pescados
-    // },
+    {
+      path: '/menu_section/pedido',
+      name: 'pedido',
+      component: Pedido
+    },
 
     {
       path: '/menu_section/addProduct',

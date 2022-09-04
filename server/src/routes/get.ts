@@ -12,10 +12,35 @@ export const appGetRouter = express();
  */
 
 /**
- * Consultar a un usuario -FINISHED - LOGIN
+ * Consultar a un usuario
  */
-appGetRouter.get('/users', async (req, res) => {
-    console.log(req.query.password)
+// appGetRouter.get('/users', async (req, res) => {
+//     console.log(req.query.password)
+//     try {
+//         const filter = req.query.email? {
+//             email: req.query.email.toString(),
+//         }:{};
+//         const user = await User.find(filter);
+
+//         if (user.length !== 0) {
+//             if(req.query.password !== user[0].password) {
+//                 res.status(403).send({
+//                     error: 'The login information was incorrect'
+//                 })
+//             } else {
+//                 return res.status(200).send(user)
+//             }
+//         } else {
+//             return res.status(404).send();
+//         }
+//     } catch (error) {
+//         return res.status(500).send();
+//     }
+// })
+
+appGetRouter.get('/pedido', async (req, res) => {
+    console.log('email')
+    console.log(req.query.email)
     try {
         const filter = req.query.email? {
             email: req.query.email.toString(),
@@ -23,20 +48,15 @@ appGetRouter.get('/users', async (req, res) => {
         const user = await User.find(filter);
 
         if (user.length !== 0) {
-            if(req.query.password !== user[0].password) {
-                res.status(403).send({
-                    error: 'The login information was incorrect'
-                })
-            } else {
-                return res.status(200).send(user)
-            }
+            return res.status(200).send(user)
         } else {
-            return res.status(404).send();
+            res.status(400).send({message: 'error'})
         }
     } catch (error) {
         return res.status(500).send();
     }
 })
+    
 
 
 /**
@@ -51,7 +71,7 @@ appGetRouter.get('/product', async (req, res) => {
         const product = await Product.find(filter);
 
         // forma de encontrar dato concreto
-        console.log(product[0]['imagePath'])
+        // console.log(product[0]['imagePath'])
 
         if (product.length !== 0) {
             return res.send(product);
@@ -126,4 +146,3 @@ appGetRouter.get('/productSearch',async (req, res) => {
         return res.status(500).send();
     }
 })
-

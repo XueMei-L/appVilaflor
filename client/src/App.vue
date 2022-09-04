@@ -34,8 +34,7 @@
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
-        <li><router-link to="/menu_section/productsAdmin" v-if="$store.state.isUserLoggedIn">Pedido</router-link></li>
-        <li><router-link to="/menu_section/products" v-if="!$store.state.isUserLoggedIn">Pedido</router-link></li>
+        <li><router-link to="/menu_section/pedido" v-if="$store.state.isUserLoggedIn">Pedido</router-link></li>
         <li><router-link to="/contact">Contacto</router-link></li>
         <p class="navegador"></p>
       </ul>

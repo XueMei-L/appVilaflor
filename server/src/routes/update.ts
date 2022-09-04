@@ -48,7 +48,6 @@ appPatchRouter.patch('/products', async (req, res) => {
   }
 });
 
-
 /**
  * Actualizar producto a un usuario determinado
  */
@@ -90,8 +89,8 @@ appPatchRouter.patch('/pedido', async (req, res) => {
  * Eliminar un producto de la compra en bbdd PEDIDO
  */
 
- appPatchRouter.patch('/pedido', async (req, res) => {
-  console.log(req.query.pedido)
+appPatchRouter.patch('/shop', async (req, res) => {
+  console.log('aquiiiiiiiii')
   if (!req.query.email) {
     return res.status(400).send({
       error: 'A email must be provided',
@@ -108,14 +107,17 @@ appPatchRouter.patch('/pedido', async (req, res) => {
       error: 'Update is not permitted',
     });
   }
+  const pedido = {
+    pedido: []
+  }
   try {
-    console.log('99')
-    const updateShopUser = await User.updateOne(
-      { email: req.query.email.toString() },
-      { $pop: { pedido: req.query.pedido?.toString() } },
-      );
-      
-      res.status(201).send(updateShopUser);
+    const updateShopUser =
+    await User.findOneAndUpdate({email: req.query.email.toString()}, pedido, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(201).send(updateShopUser);
 
   } catch (error) {
     console.log('123')
