@@ -208,7 +208,7 @@ export default {
     },
     loadproduct () {
       axios
-        .get('http://localhost:8081/products')
+        .get('http://localhost:8081/products?type=Frutas o Vegetales')
         .then((response) => {
           this.products = response.data
           console.log(this.products)

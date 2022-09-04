@@ -77,7 +77,6 @@ appGetRouter.get('/files', async(req, res) => {
         // read image file and send to cliet
         const ImgPath = product[0]['imagePath']
         fs.readFile(ImgPath, function(err, data) {
-            console.log('find')
             if (err) throw err; // Fail if the file can't be read.
             res.setHeader("Content-Type", "image/jpg");
             res.write(data);
@@ -94,8 +93,12 @@ appGetRouter.get('/files', async(req, res) => {
  * Consultar a todos los productos
  */
 appGetRouter.get('/products',async (req, res) => {
+    console.log('123')
     try {
-        const allProduct = await Product.find();
+        const filter = req.query.type? {
+            type: req.query.type.toString(),
+        }:{};
+        const allProduct = await Product.find(filter);
         return res.json(allProduct)
     } catch (err) {
         return res.status(500).send();
