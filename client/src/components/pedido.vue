@@ -50,11 +50,12 @@ export default {
     back () {
       this.$router.back(-1)
     },
-    buy () {
+    async buy (email) {
       this.shoppingCarInfor = null
       this.shoppingCar = null
       this.srcShoppingCar = null
       alert('Tu compra ha sido procesada')
+      await axios.patch(`http://localhost:8081/shop?email=${email}`)
     },
     async getShoppingCar (name) {
       try {
