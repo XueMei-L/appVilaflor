@@ -32,7 +32,9 @@
           <p>{{ p.formOfSale }}</p>
           <h1>{{ p.name }}</h1>
           <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
-          <button class="button" v-on:click=addProduct(p.name)>Añadir</button>
+          <button v-if="!$store.state.isUserLoggedIn" class="button" v-on:click=addProduct(p.name)>Añadir</button>
+          <button v-else-if="user.type === 'admin'" class="button" v-on:click=addProduct(p.name)>editar</button>
+          <button v-else class="button" v-on:click=addProduct(p.name)>Añadir</button>
       </div>
     </div>
     </div>
@@ -44,6 +46,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
 
@@ -104,6 +107,9 @@ export default {
 
   // Antes de montar la pagina. autocarga
   mounted () {
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>
