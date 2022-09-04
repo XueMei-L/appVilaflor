@@ -50,7 +50,7 @@
           <label><b>Forma de venta:</b> {{editProductformOfSale}}</label><br/><br/>
           <label><b>Precio:</b> {{editProductpricePerOne}} €</label><br/><br/>
           <label>Tipo de producto: </label>
-             <select v-model="productType">
+             <select v-model="productTypeEdit">
               <option>Frutas o Vegetales</option>
               <option>Pescados</option>
               <option>Carnes</option>
@@ -58,21 +58,21 @@
             </select><br/><br/>
             <!-- Informacion - Nombre de producto -->
             <label>Nombre:</label>
-            <input type="text" v-model="productName" placeholder="Nombre de producto"><br/><br/>
+            <input type="text" v-model="productNameEdit" placeholder="Nombre de producto"><br/><br/>
             <!-- Informacion - Stock de producto -->
             <label>Stock:</label>
-            <input type="number" min="0" v-model="productStock" placeholder="Stock"><br/><br/>
+            <input type="number" min="0" v-model="productStockEdit" placeholder="Stock"><br/><br/>
             <!-- Informacion - Forma de venta de producto -->
             <label>Forma de venta: </label>
-            <select v-model="productFormOfSale">
+            <select v-model="productFormOfSaleEdit">
               <option>Precio/Kilo</option>
               <option>Precio/Unidad</option>
             </select><br/><br/>
             <label>Precio:</label>
-            <input type="number" step="any" min="0" v-model="productPrice" placeholder="Precio"> €<br/><br/>
+            <input type="number" step="any" min="0" v-model="productPriceEdit" placeholder="Precio"> €<br/><br/>
             <br/><br/>
           </div>
-            <button class="button" style="margin-bottom:10px;">Guardar</button>
+            <button class="button" style="margin-bottom:10px;" v-on:click="saveInfo(editProductName)">Guardar</button>
             <button class="button" style="margin-bottom:10px;" @click="openWindows = false">Cancelar</button>
         </div>
       </div>
@@ -111,12 +111,19 @@ export default {
       src: [],
       openWindows: false,
       openWindowsdelete: false,
-      // editproduType:null,
-      editProductName: '',
-      editProductType: '',
+
+      editProductName: null,
+      editProductType: null,
       editProductformOfSale: null,
       editProductpricePerOne: null,
-      editProductStock: null
+      editProductStock: null,
+
+      // form data to update
+      productNameEdit: null,
+      productTypeEdit: null,
+      productStockEdit: null,
+      productFormOfSaleEdit: null,
+      productPriceEdit: null
     }
   },
 
@@ -168,7 +175,9 @@ export default {
       // refresh products
       this.loadproduct()
     },
+    // Mostrar datos para editar
     async editarProduct (name) {
+      var nameEdit, typeEdit, formEdit, priceEdit, stockEdit
       console.log('editar')
       this.openWindows = true
       this.openWindowsdelete = false
@@ -178,16 +187,47 @@ export default {
           methods: 'get'
         }).then(res => {
           console.log('heredidddddd')
-          console.log(res.data)
-          this.editProductName = res.data[0]['name']
-          this.editProductType = res.data[0]['type']
-          this.editProductformOfSale = res.data[0]['formOfSale']
-          this.editProductpricePerOne = res.data[0]['pricePerOne']
-          this.editProductStock = res.data[0]['stock']
+          nameEdit = res.data[0]['name']
+          typeEdit = res.data[0]['type']
+          formEdit = res.data[0]['formOfSale']
+          priceEdit = res.data[0]['pricePerOne']
+          stockEdit = res.data[0]['stock']
         })
       } catch (err) {
         console.log(err)
       }
+      this.editProductName = nameEdit
+      this.editProductType = typeEdit
+      this.editProductformOfSale = formEdit
+      this.editProductpricePerOne = priceEdit
+      this.editProductStock = stockEdit
+    },
+    // Para actualizar datos
+    async saveInfo (name) {
+      try {
+        await axios.patch(`http://localhost:8081/products?name=${name}`,
+          {
+            name: this.productNameEdit,
+            type: this.productTypeEdit,
+            stock: this.productStockEdit,
+            formOfSale: this.productFormOfSaleEdit,
+            pricePerOne: this.productPriceEdit
+          }
+        ).then(res => {
+          return res
+        })
+      } catch (err) {
+        console.log(err)
+        return err
+      }
+      alert('saved')
+      this.openWindows = false
+      this.productNameEdit = null
+      this.productTypeEdit = null
+      this.productStockEdit = null
+      this.productFormOfSaleEdit = null
+      this.productPriceEdit = null
+      this.loadproduct()
     },
     async add (name) {
       try {
