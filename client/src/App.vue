@@ -19,14 +19,16 @@
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
       <router-link to ="/Login">
-      <button class="seach_box">{{username}}</button>
+      <button v-if="$store.state.isUserLoggedIn" class="seach_box">Login</button>
       </router-link>
       <router-link to ="/Register">
-      <button class="seach_box">Sign up</button>
+      <button v-if="$store.state.isUserLoggedIn" class="seach_box">Sign up</button>
       </router-link>
+      <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Logout</button>
       <router-link to ="/Search">
       <button class="seach_box">Buscador</button>
       </router-link>
+      
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
