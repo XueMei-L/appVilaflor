@@ -61,20 +61,27 @@ function jwtSignUser (user) {
 // login
 appPostRouter.post('/login', async (req, res) => {
     try {
-        const {email, password} = req.body
+        // console.log(req.body.email)
+        // console.log(req.body.password)
+        const {password} = req.body
         const user = await User.findOne({
-          where: {
-            email: email
-          }
+          email: req.body.email.toString(),
+          password: req.body.password.toString()
         })
+
+        console.log(user)
   
         if (!user) {
+          console.log(1111111)
           return res.status(403).send({
             error: 'The login information was incorrect'
           })
         }
-  
-        if (password == user.password) {
+        
+        console.log(password)
+        console.log(user.password)
+        if (password !== user.password) {
+          console.log(222)
           return res.status(403).send({
             error: 'The login information was incorrect'
           })

@@ -18,6 +18,8 @@
 
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
+      <button v-if="user" class="seach_box">Hi, {{user}}</button>
+
       <router-link to ="/Login">
       <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Login</button>
       </router-link>
@@ -124,6 +126,8 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'App',
 
@@ -136,8 +140,6 @@ export default {
   },
   methods: {
     async submitText () {
-      console.log(1)
-      console.log(this.searchText)
       this.$router.push('/Search')
       var name = this.searchText.toUpperCase()
       try {
@@ -146,7 +148,6 @@ export default {
           url: `http://localhost:8081/product?name=${name}`,
           method: 'get'
         }).then((res) => {
-          console.log('here2')
           return res
         })
       } catch (err) {
@@ -156,9 +157,13 @@ export default {
       }
     },
     logout () {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
       this.$router.push('/')
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 
 }

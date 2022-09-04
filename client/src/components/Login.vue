@@ -72,6 +72,7 @@ export default {
             password: this.passwordLogin
           }).then(response => {
             console.log(response.data.token)
+            console.log(response.data.user)
             console.log('entra')
             this.$store.dispatch('setToken', response.data.token)
             this.$store.dispatch('setUser', response.data.user)
