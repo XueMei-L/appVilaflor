@@ -24,7 +24,8 @@
             <p>{{ p.formOfSale }}</p>
             <h1>{{ p.name }}</h1>
             <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
-            <button v-if="user.type == 'admin'" class="button" v-on:click=addProduct(p.name)>Editar</button>
+            <button v-if="user.type == 'admin'" class="button" v-on:click=editarProduct(p.name)>Editar</button>
+            <button v-if="user.type == 'admin'" class="button" v-on:click=deleteProduct(p.name)>Eliminar</button>
             <button v-else class="button" v-on:click=addProduct(p.name)>Añadir</button>
         </div>
       </div>
@@ -38,9 +39,60 @@
             <button class="button" style="margin-bottom:10px;">Agregar</button>
             </router-link>
         </div>
+      </div>
+      <div class="responsive" v-if="openWindows">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px; width:500px;">
+          <h1 style="margin-top:10px">Editar información</h1><br/>
+          <h2>{{editProductName}}</h2><br/>
+          <div style="text-align:left; margin-left:20px">
+          <label><b>Tipo de producto:</b> {{editProductType}}</label><br/><br/>
+          <label><b>Stock:</b> {{editProductStock}}</label><br/><br/>
+          <label><b>Forma de venta:</b> {{editProductformOfSale}}</label><br/><br/>
+          <label><b>Precio:</b> {{editProductpricePerOne}} €</label><br/><br/>
+          <label>Tipo de producto: </label>
+             <select v-model="productType">
+              <option>Frutas o Vegetales</option>
+              <option>Pescados</option>
+              <option>Carnes</option>
+              <option>Perfumes</option>
+            </select><br/><br/>
+            <!-- Informacion - Nombre de producto -->
+            <label>Nombre:</label>
+            <input type="text" v-model="productName" placeholder="Nombre de producto"><br/><br/>
+            <!-- Informacion - Stock de producto -->
+            <label>Stock:</label>
+            <input type="number" min="0" v-model="productStock" placeholder="Stock"><br/><br/>
+            <!-- Informacion - Forma de venta de producto -->
+            <label>Forma de venta: </label>
+            <select v-model="productFormOfSale">
+              <option>Precio/Kilo</option>
+              <option>Precio/Unidad</option>
+            </select><br/><br/>
+            <label>Precio:</label>
+            <input type="number" step="any" min="0" v-model="productPrice" placeholder="Precio"> €<br/><br/>
+            <br/><br/>
+          </div>
+            <button class="button" style="margin-bottom:10px;">Guardar</button>
+            <button class="button" style="margin-bottom:10px;" @click="openWindows = false">Cancelar</button>
         </div>
+      </div>
+      <div class="responsive" v-if="openWindowsdelete">
+        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px; width:500px;">
+          <h1 style="margin-top:10px">Editar información</h1><br/>
+          <h2>{{editProductName}}</h2><br/>
+          <div style="text-align:left; margin-left:20px">
+          <label><b>Tipo de producto:</b> {{editProductType}}</label><br/><br/>
+          <label><b>Stock:</b> {{editProductStock}}</label><br/><br/>
+          <label><b>Forma de venta:</b> {{editProductformOfSale}}</label><br/><br/>
+          <label><b>Precio:</b> {{editProductpricePerOne}} €</label><br/><br/>
+          </div>
+          <div>
+            <button class="button" style="margin-bottom:10px;" v-on:click="deleteProductFromBBDD(editProductName)">Eliminar</button>
+            <button class="button" style="margin-bottom:10px;" @click="openWindowsdelete = false">Cancelar</button>
+          </div>
+        </div>
+      </div>
     </div>
-
     </div>
   </body>
 </div>
@@ -55,12 +107,16 @@ export default {
 
   data () {
     return {
-      htmlData: '',
-      infoName: null,
-      infoFormOfSale: null,
-      infoPricePerOne: null,
       products: [],
-      src: []
+      src: [],
+      openWindows: false,
+      openWindowsdelete: false,
+      // editproduType:null,
+      editProductName: '',
+      editProductType: '',
+      editProductformOfSale: null,
+      editProductpricePerOne: null,
+      editProductStock: null
     }
   },
 
@@ -71,6 +127,67 @@ export default {
     },
     addProduct (name) {
       alert('add' + name)
+    },
+    async deleteProduct (name) {
+      this.openWindows = false
+      this.openWindowsdelete = true
+      var name1, type, form, price, stock
+
+      try {
+        await axios({
+          url: `http://localhost:8081/product?name=${name}`,
+          methods: 'get'
+        }).then(res => {
+          console.log('heredidddddd')
+          console.log(res.data)
+          name1 = res.data[0]['name']
+          type = res.data[0]['type']
+          form = res.data[0]['formOfSale']
+          price = res.data[0]['pricePerOne']
+          stock = res.data[0]['stock']
+        })
+      } catch (err) {
+        console.log(err)
+      }
+      this.editProductName = name1
+      this.editProductType = type
+      this.editProductformOfSale = form
+      this.editProductpricePerOne = price
+      this.editProductStock = stock
+    },
+    async deleteProductFromBBDD (deleteName) {
+      try {
+        await axios.delete(`http://localhost:8081/delete?name=${deleteName}`
+        ).then(res => {
+          alert(deleteName + 'eliminado')
+          this.openWindowsdelete = false
+        })
+      } catch (err) {
+        console.log(err)
+      }
+      // refresh products
+      this.loadproduct()
+    },
+    async editarProduct (name) {
+      console.log('editar')
+      this.openWindows = true
+      this.openWindowsdelete = false
+      try {
+        await axios({
+          url: `http://localhost:8081/product?name=${name}`,
+          methods: 'get'
+        }).then(res => {
+          console.log('heredidddddd')
+          console.log(res.data)
+          this.editProductName = res.data[0]['name']
+          this.editProductType = res.data[0]['type']
+          this.editProductformOfSale = res.data[0]['formOfSale']
+          this.editProductpricePerOne = res.data[0]['pricePerOne']
+          this.editProductStock = res.data[0]['stock']
+        })
+      } catch (err) {
+        console.log(err)
+      }
     },
     async add (name) {
       try {
@@ -88,23 +205,26 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    loadproduct () {
+      axios
+        .get('http://localhost:8081/products')
+        .then((response) => {
+          this.products = response.data
+          console.log(this.products)
+          this.products.forEach(element => {
+            this.add(element['name'])
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
 
   // Antes de montar la pagina. autocarga
   mounted () {
-    axios
-      .get('http://localhost:8081/products')
-      .then((response) => {
-        this.products = response.data
-        console.log(this.products)
-        this.products.forEach(element => {
-          this.add(element['name'])
-        })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.loadproduct()
   },
 
   computed: {

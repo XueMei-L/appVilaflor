@@ -14,8 +14,7 @@
     <!-- El modelo del fondo -->
     <div class="container_main" align=center style="background-color:#ebeef3;">
     <br><p style="font-size:50px;">Añadir un nuevo prodcuto</p><br>
-    <div><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
-
+    <div align='left' style="position: static; margin-left:16%"><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
     <div class="page-background">
       <div class="responsive" style="width:40%;">
       <div class="img" style="background-color:#ffffff; border-radius: 10px; margin-right:30px">

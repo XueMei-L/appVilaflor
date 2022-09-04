@@ -35,8 +35,9 @@ export const appDeleteRouter = express();
 /**
  * Eliminar un producto
  */
-appDeleteRouter.delete('/products', async (req, res) => {
-    if (!req.query.name) {
+appDeleteRouter.delete('/delete', async (req, res) => {
+    console.log(req.query.name)  
+  if (!req.query.name) {
       return res.status(400).send({
         error: 'A name must be provided',
       });
@@ -44,7 +45,7 @@ appDeleteRouter.delete('/products', async (req, res) => {
   
     try {
       // filtra para encontrar el objecto
-      const product = await Product.findOneAndDelete({title: req.query.name.toString()});
+      const product = await Product.findOneAndDelete({name: req.query.name.toString()});
   
       if (!product) {
         return res.status(404).send();
