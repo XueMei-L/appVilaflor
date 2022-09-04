@@ -7,7 +7,9 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
-import ProductFruits from '@/components/menu_section/productFruits'
+import Products from '@/components/menu_section/products'
+import ProductsAdmin from '@/components/menu_section/productsAdmin'
+
 // import Pescados from '@/components/menu_section/pescados'
 import AddFrutas from '@/components/menu_section/addFrutas'
 // import Product from '@/components/menu_section/product'
@@ -63,9 +65,14 @@ export default new Router({
 
     // seccion de menu
     {
-      path: '/menu_section/productFruits',
-      name: 'ProductFruits',
-      component: ProductFruits
+      path: '/menu_section/products',
+      name: 'products',
+      component: Products
+    },
+    {
+      path: '/menu_section/productsAdmin',
+      name: 'productsAdmin',
+      component: ProductsAdmin
     },
 
     // {

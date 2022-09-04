@@ -18,6 +18,7 @@
     <div align='left' style="position: static; margin-left:16%"><Button class="button" style="background-color:white; color:black;" v-on:click = back>Volver</Button></div><br/>
 
     <!-- <button v-on:click="infoProduct" class="button" style="margin-bottom:10px;">show</button> -->
+
     <div class="page-background">
       <div class="responsive" style="display:inline-block">
           <div class="polaroid" style="display:inline-block" v-bind:key="p.id" v-for="(p, index) in products">
@@ -25,24 +26,11 @@
             <p>{{ p.formOfSale }}</p>
             <h1>{{ p.name }}</h1>
             <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
-            <button v-if="user.type == 'admin'" class="button" v-on:click=addProduct(p.name)>Editar</button>
-            <button v-else class="button" v-on:click=addProduct(p.name)>Añadir</button>
-        </div>
-      </div>
-      <div v-if="user.type == 'admin'">
-        <div class="responsive">
-        <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
-            <router-link to = "/menu_section/addFrutas">
-            <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
-            </router-link>
-            <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar una nueva fruta o vegetal</b><br><br>
-            <router-link to = "/menu_section/addFrutas">
-            <button class="button" style="margin-bottom:10px;">Agregar</button>
-            </router-link>
-        </div>
+            <button class="button" v-on:click=addProduct(p.name)>Añadir</button>
         </div>
       </div>
     </div>
+
     </div>
   </body>
 </div>
@@ -51,16 +39,11 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
 
 export default {
 
   data () {
     return {
-      htmlData: '',
-      infoName: null,
-      infoFormOfSale: null,
-      infoPricePerOne: null,
       products: [],
       src: []
     }
@@ -72,7 +55,7 @@ export default {
       this.$router.back(-1)
     },
     addProduct (name) {
-      alert('add' + name)
+      alert('Logea para realizar la compra, por favor')
     },
     async add (name) {
       try {
@@ -107,10 +90,6 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-  },
-
-  computed: {
-    ...mapGetters(['user'])
   }
 }
 </script>

@@ -92,9 +92,6 @@ export default {
 
   methods: {
     // para devolver al la pagina anterior
-    back () {
-      this.$router.back(-1)
-    },
     onChangeFile (event) {
       if (event.target.files[0]) {
         this.ProductImgFile = this.$refs.file.files[0]
@@ -134,7 +131,6 @@ export default {
         })
 
         alert(`Agregado el nuevo producto (${this.productName})`)
-        this.$router.push('/menu_section/addFrutas')
       } catch (err) {
         console.log(err)
       }

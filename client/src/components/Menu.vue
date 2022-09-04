@@ -19,7 +19,10 @@
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
           <div class="desc">FRUTAS Y VEGETALES</div>
-          <router-link to = "/menu_section/productFruits">
+          <router-link to = "/menu_section/productsAdmin" v-if="$store.state.isUserLoggedIn">
+          <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
+          </router-link>
+          <router-link to = "/menu_section/products" v-if="!$store.state.isUserLoggedIn">
           <img src="./imagenes/frutas.jpg" alt="foto de frutas" style="margin:10px;border-radius: 10px;">
           </router-link>
       </div>
