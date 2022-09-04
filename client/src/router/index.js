@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Register from '@/components/Register'
+import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Menu from '@/components/Menu'
 import Contact from '@/components/contact'
@@ -37,6 +38,11 @@ export default new Router({
       path: '/Register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/contact',

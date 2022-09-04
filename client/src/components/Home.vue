@@ -18,30 +18,6 @@
           <h1 style="font-size: 50px; color:black"><i>Tu Mercado ideal<br> @vilaflor</i></h1>
         </span>
       </div>
-
-      <div class="container-right">
-        <div class="container-login">
-          <form action="" class="login">
-            <h2><p style="color:black; margin-top:10%;">Sign In</p></h2>
-
-            <!-- Login with accout -->
-            <input type="text" v-model="emailLogin" placeholder="Email">
-            <input type="password" v-model="passwordLogin" placeholder="Password">
-
-            <!-- button of login -->
-            <div class="sign_in">
-              <p class="err-msg">{{loginmsg}}</p>
-              <input type="submit" v-on:click = "CheckUser" value="Login">
-            </div>
-
-            <!-- Sign In Not Accout -->
-            <p>Don't have an account? <br><br><router-link to="/Register">Sign up here</router-link></p>
-            <!-- Forgot password change link -->
-            <p><a href="https://www.google.com/">Forgot your password?</a></p>
-          </form>
-          </div>
-
-      </div>
     </div>
   </body>
 </div>
@@ -49,7 +25,6 @@
 
 <script>
 import axios from 'axios'
-import CheckUser from '../services/AuthenticaltionService'
 
 export default {
   name: 'App',
@@ -64,12 +39,6 @@ export default {
   },
 
   methods: {
-
-    callCheckUserFunction () {
-      const email = this.emailLogin
-      var password = this.passwordLogin
-      CheckUser(email, password)
-    },
     async CheckUser () {
       if (!this.passwordLogin || !this.emailLogin) {
         this.loginmsg = 'Rellenas datos necesarios para hacer login'

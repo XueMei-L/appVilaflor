@@ -18,7 +18,12 @@
 
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
+      <router-link to ="/Login">
       <button class="seach_box">{{username}}</button>
+      </router-link>
+      <router-link to ="/Register">
+      <button class="seach_box">Sign up</button>
+      </router-link>
       <router-link to ="/Search">
       <button class="seach_box">Buscador</button>
       </router-link>
