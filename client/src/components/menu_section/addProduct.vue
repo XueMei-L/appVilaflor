@@ -27,6 +27,7 @@
               <option>Pescados</option>
               <option>Carnes</option>
               <option>Perfumes</option>
+              <option>Otros</option>
             </select><br/><br/>
             <!-- Informacion - Nombre de producto -->
             <label>Nombre:</label>

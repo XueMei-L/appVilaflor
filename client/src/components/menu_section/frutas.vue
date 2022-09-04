@@ -31,11 +31,11 @@
       </div>
       <div class="responsive" v-if="user.type == 'admin'">
         <div class="polaroid" style="background-color:#ffffff; border-radius: 10px;">
-            <router-link to = "/menu_section/addFrutas">
+            <router-link to = "/menu_section/addProduct">
             <img src="../imagenes/add1.png" alt="Norway" style="width:90%; margin:10px; border-radius: 10px;">
             </router-link>
             <b align="right" style="margin-right:5px; color:#3885ff; font-size: 15px;">Agregar un nuevo producto</b><br><br>
-            <router-link to = "/menu_section/addFrutas">
+            <router-link to = "/menu_section/addProduct">
             <button class="button" style="margin-bottom:10px;">Agregar</button>
             </router-link>
         </div>

@@ -16,12 +16,9 @@ import Perfumes from '@/components/menu_section/perfumes'
 import Frutas from '@/components/menu_section/frutas'
 import Carnes from '@/components/menu_section/carnes'
 
-// import Pescados from '@/components/menu_section/pescados'
-import AddFrutas from '@/components/menu_section/addFrutas'
-// import Product from '@/components/menu_section/product'
+import AddProduct from '@/components/menu_section/addProduct'
 
 import SearchPage from '@/components/searchResult'
-import EditProduct from '@/components/menu_section/editProduct'
 
 import Privacidad from '@/components/footer/privacidad'
 import TerminoDeUso from '@/components/footer/termino_de_uso'
@@ -62,11 +59,6 @@ export default new Router({
       path: '/search',
       name: 'Search',
       component: SearchPage
-    },
-    {
-      path: '/menu_section/edit',
-      name: 'Edit',
-      component: EditProduct
     },
 
     // seccion de menu
@@ -118,9 +110,9 @@ export default new Router({
     // },
 
     {
-      path: '/menu_section/addFrutas',
-      name: 'addFrutas',
-      component: AddFrutas
+      path: '/menu_section/addProduct',
+      name: 'addProduct',
+      component: AddProduct
     },
 
     // {

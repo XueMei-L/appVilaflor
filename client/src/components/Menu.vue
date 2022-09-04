@@ -56,7 +56,7 @@
 
       <div class="responsive">
       <div class="img" style="background-color:#ffffff;border-radius: 10px;">
-          <div class="desc">PERFUMES</div>
+          <div class="desc">OTROS</div>
           <router-link to = "/menu_section/perfumes" v-if="$store.state.isUserLoggedIn">
           <img src="./imagenes/perfumes.jpg" alt="foto de perfumes" style="margin:10px;border-radius: 10px;">
           </router-link>
