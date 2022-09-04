@@ -91,6 +91,10 @@ export default {
   },
 
   methods: {
+    back () {
+      this.$router.back(-1)
+    },
+
     // para devolver al la pagina anterior
     onChangeFile (event) {
       if (event.target.files[0]) {
