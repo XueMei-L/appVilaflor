@@ -74,7 +74,7 @@ export default {
             console.log(response.data.token)
             console.log('entra')
             this.$store.dispatch('setToken', response.data.token)
-            // this.$store.dispatch('setUser', response.data.user)
+            this.$store.dispatch('setUser', response.data.user)
             // localStorage.setItem('token', response.data.token)
             // salto de pagina
             this.loginmsg = null

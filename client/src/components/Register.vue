@@ -21,7 +21,7 @@
 
       <div class="container-right">
         <div class="container-login">
-          <form action="" class="login">
+          <form @submit.prevent="postUser" class="login">
             <h2><p style="color:black; margin-top:10%;">Create an accout</p></h2>
 
             <!-- registeer section -->
@@ -33,9 +33,7 @@
             <input type="password" v-model="repeatpassword" placeholder="Confirm Password">
             <p class="err-msg">{{passwordmsg}}</p>
             <!-- button of login -->
-            <div>
-            <button class="Register" v-on:click = "postUser" type="button" id="add">Create Your Accout</button>
-            </div>
+            <button class="Register" type="submit" id="add">Create Your Accout</button>
           </form>
           </div>
 
