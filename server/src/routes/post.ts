@@ -50,43 +50,46 @@ appPostRouter.post('/register', async (req, res) => {
   }
 })
 
+// JWT for login
+function jwtSignUser (user) {
+    const ONE_WEEK = 60 * 60 * 24 * 7
+    return jwt.sign(user, jwtSecret, {
+        expiresIn: ONE_WEEK
+    })
+}
+
 // login
 appPostRouter.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body
+        const {email, password} = req.body
         const user = await User.findOne({
-            where : {
-                email: email,
-            }
+          where: {
+            email: email
+          }
         })
-
-        if(!user) {
-            return res.status(403).send({
-                error: "The login information was incorrect'"
-            })
+  
+        if (!user) {
+          return res.status(403).send({
+            error: 'The login information was incorrect'
+          })
         }
-
-        const isPasswordValid = password === user.password
-        if(!isPasswordValid) {
-            return res.status(403).send({
-                error: "The login information was incorrect'"
-            })
+  
+        if (password == user.password) {
+          return res.status(403).send({
+            error: 'The login information was incorrect'
+          })
         }
-
-        const userJson = user.toJSON();
-        const token = jwt.sign(userJson, jwtSecret, {
-            expiresIn: 604800 // 1 week
-            });
-        
-        console.log('here')
-        return res.send({
-            user: user,
-            token: token
+  
+        const userJson = user.toJSON()
+        res.send({
+          user: userJson,
+          token: jwtSignUser(userJson)
         })
-    } catch (err) {
-        console.log(err)
-        return res.status(500).send();
-    }
+      } catch (err) {
+        res.status(500).send({
+          error: 'An error has occured trying to log in'
+        })
+      }
 })
 
 

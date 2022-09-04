@@ -77,12 +77,12 @@ export default {
             email: this.email,
             password: this.password
           }).then((response) => {
-            this.$store.dispatch('setToken', response.data.token)
-            this.$store.dispatch('setUser', response.data.username)
+            // this.$store.dispatch('setToken', response.data.token)
+            // this.$store.dispatch('setUser', response.data.username)
             console.log('eee')
           })
         alert('Usuario creado correctamente, se le redirigira al inicio de sesion')
-        this.$router.push('/')
+        this.$router.push('/Login')
       }
     },
 
