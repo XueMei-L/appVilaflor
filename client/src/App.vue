@@ -11,24 +11,24 @@
 
     </head>
     <div>
-      <a target="_self" href="/">
+      <router-link to ="/">
       <img src="./components/imagenes/logo.jpg" alt="foto de frutas" style="width:80px">
-      </a>
+      </router-link>
     </div>
 
     <div class="home-page">
       <!-- <input id="searchMsg" class="seach_box" type="text" v-model="searchText" v-on:keyup.13="submitText" placeholder="Search"> -->
       <router-link to ="/Login">
-      <button v-if="$store.state.isUserLoggedIn" class="seach_box">Login</button>
+      <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Login</button>
       </router-link>
       <router-link to ="/Register">
-      <button v-if="$store.state.isUserLoggedIn" class="seach_box">Sign up</button>
+      <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Sign up</button>
       </router-link>
-      <button v-if="!$store.state.isUserLoggedIn" class="seach_box">Logout</button>
+      <button v-if="$store.state.isUserLoggedIn" v-on:click = "logout" class="seach_box">Logout</button>
       <router-link to ="/Search">
       <button class="seach_box">Buscador</button>
       </router-link>
-      
+
       <ul id="nav">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/Menu">Categoria</router-link></li>
@@ -154,6 +154,10 @@ export default {
         console.log(err)
         return this.msgSearch
       }
+    },
+    logout () {
+      this.$store.dispatch('logout')
+      this.$router.push('/')
     }
   }
 
