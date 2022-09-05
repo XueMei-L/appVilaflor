@@ -35,14 +35,8 @@ appPostRouter.post('/register', async (req, res) => {
       // guardar el usuario en el bbdd
       const user = await newUser.save();
 
-      const token = jwt.sign(user.toObject(), jwtSecret, {
-        expiresIn: 604800 // 1 week
-        });
-        console.log(token)
-        console.log('register')
-        res.send({
-            user: user,
-            token: token
+      res.send({
+            user: user
         })
   } catch (err) {
     console.log(err)

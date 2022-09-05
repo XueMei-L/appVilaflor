@@ -1,16 +1,15 @@
 import {Document, Schema, model} from 'mongoose';
 
 /**
- * Interfaz de un artista
+ * Interfaz de un usuario
  */
- interface UserDocumentInterface extends Document {
+interface UserDocumentInterface extends Document {
     username: string,
     email: string,
     password: string,
     type: string,
     pedido: string[]
-  }
-  
+}
 
 const UserSchema = new Schema({
     username: {
@@ -21,12 +20,12 @@ const UserSchema = new Schema({
         type: String,
         require: true,
         unique: true,
-        // match: RegExp(/\S+@\S+\.\S+/)
+        match: RegExp(/\S+@\S+\.\S+/)
     },
     password: {
         type: String,
         require: true,
-        // match: RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,}$/)
+        match: RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{6,}$/)
     },
     type: {
         type: String,

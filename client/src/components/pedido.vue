@@ -24,7 +24,9 @@
             <p style="color:black; font-size:20px; margin-top:30px;">{{ p[0].pricePerOne }} €</p>
             </div>
         </div>
+        <div style="display:block">
         <button class="button" style="margin-bottom:10px;" v-on:click=buy(user.email)>Comprar</button>
+        </div>
       </div>
       </div>
     </div>
@@ -88,9 +90,10 @@ export default {
         console.log(err)
       }
     },
-    loadShoppingCart () {
+    loadShoppingCart (email) {
+      console.log(email)
       axios
-        .get('http://localhost:8081/pedido?email=abc@gmail.com')
+        .get(`http://localhost:8081/pedido?email=${email}`)
         .then((response) => {
           this.shoppingCar = response.data[0].pedido
           this.shoppingCar.forEach(element => {
@@ -106,7 +109,7 @@ export default {
   },
 
   mounted () {
-    this.loadShoppingCart()
+    this.loadShoppingCart(this.$store.state.user.email)
   },
 
   computed: {
