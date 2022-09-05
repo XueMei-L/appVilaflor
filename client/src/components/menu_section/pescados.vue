@@ -54,7 +54,7 @@
               <option>Frutas o Vegetales</option>
               <option>Pescados</option>
               <option>Carnes</option>
-              <option>Perfumes</option>
+              <option>Otros</option>
             </select><br/><br/>
             <!-- Informacion - Nombre de producto -->
             <label>Nombre:</label>
@@ -72,7 +72,7 @@
             <input type="number" step="any" min="0" v-model="productPrice" placeholder="Precio"> €<br/><br/>
             <br/><br/>
           </div>
-            <button class="button" style="margin-bottom:10px;">Guardar</button>
+            <button class="button" style="margin-bottom:10px;" v-on:click="saveInfo(editProductName)">Guardar</button>
             <button class="button" style="margin-bottom:10px;" @click="openWindows = false">Cancelar</button>
         </div>
       </div>
@@ -193,6 +193,33 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    // Para actualizar datos
+    async saveInfo (name) {
+      try {
+        await axios.patch(`http://localhost:8081/products?name=${name}`,
+          {
+            name: this.productNameEdit,
+            type: this.productTypeEdit,
+            stock: this.productStockEdit,
+            formOfSale: this.productFormOfSaleEdit,
+            pricePerOne: this.productPriceEdit
+          }
+        ).then(res => {
+          return res
+        })
+      } catch (err) {
+        console.log(err)
+        return err
+      }
+      alert('saved')
+      this.openWindows = false
+      this.productNameEdit = null
+      this.productTypeEdit = null
+      this.productStockEdit = null
+      this.productFormOfSaleEdit = null
+      this.productPriceEdit = null
+      this.loadproduct()
     },
     async add (name) {
       try {

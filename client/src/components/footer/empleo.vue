@@ -18,7 +18,7 @@
         <div class="page-background">
             <div class="card">
                 <div class="subcard">
-                    <br><p style="font-size:50px; font-style: italic;">Sobre nosotros</p><br>
+                    <br><p style="font-size:50px; font-style: italic; color:black">Sobre nosotros</p><br>
                 </div>
                 <div class="text">
                     <img src="../imagenes/logo2.jpg" alt="Norway" style=" float: left; width:30%; margin:10px; border-radius: 10px;">
@@ -33,7 +33,7 @@
         <div class="page-background">
             <div class="card">
                 <div class="subcard">
-                    <br><p style="font-size:50px; font-style: italic;">Trabajar con nosotros</p><br>
+                    <br><p style="font-size:50px; font-style: italic; color:black">Trabajar con nosotros</p><br>
                 </div>
                 <div class="text">
                     <img src="../imagenes/work.jpg" alt="Norway" style=" float: right; width:35%; margin:10px;">
@@ -50,7 +50,7 @@
         <div class="page-background">
             <div class="card">
                 <div class="subcard">
-                    <br><p style="font-size:50px; font-style: italic;">Contacto por correo</p><br>
+                    <br><p style="font-size:50px; font-style: italic; color:black">Contacto por correo</p><br>
                 </div>
                 <div class="text">
                     <p style="text-align:center; margin-top:10%; margin-bottom:10%; font-size:30px; font-style: italic;">VilaflorRRHH@gmail.com</p>

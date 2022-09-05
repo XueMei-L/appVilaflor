@@ -24,9 +24,33 @@
           <th>Direccion</th>
           <th>Horario de atencion</th>
         <tr>
-          <td>svilaflor@gmail.com</td>
+          <td>svilaflorSC@gmail.com</td>
           <td>699356895 (Llamadas gratuitas dentro del territorio español)</td>
-          <td>C/Molinos de cal, 38. La Laguna. Tenerife. Islas Canarias. España</td>
+          <td>C/Molinos de cal, 38. Santa Cruz. Tenerife. Islas Canarias. España</td>
+          <td>Lunes a viernes de 8:30 a 17:30</td>
+        </tr>
+        <tr>
+          <td>svilaflorLL@gmail.com</td>
+          <td>688024226 (Llamadas gratuitas dentro del territorio español)</td>
+          <td>C/Principal, 38. La Laguna. Tenerife. Islas Canarias. España</td>
+          <td>Lunes a viernes de 8:30 a 17:30</td>
+        </tr>
+        <tr>
+          <td>svilaflorSS@gmail.com</td>
+          <td>615478195 (Llamadas gratuitas dentro del territorio español)</td>
+          <td>C/Principe, 20. San isidro. Tenerife. Islas Canarias. España</td>
+          <td>Lunes a viernes de 8:30 a 17:30</td>
+        </tr>
+        <tr>
+          <td>svilaflorAME@gmail.com</td>
+          <td>299415786 (Llamadas gratuitas dentro del territorio español)</td>
+          <td>C/Isla de la graciosa, 12. Las Americas. Tenerife. Islas Canarias. España</td>
+          <td>Lunes a viernes de 8:30 a 17:30</td>
+        </tr>
+        <tr>
+          <td>svilaflorSJ@gmail.com</td>
+          <td>699356895 (Llamadas gratuitas dentro del territorio español)</td>
+          <td>C/Juan carlos, 78. La Laguna. Tenerife. Islas Canarias. España</td>
           <td>Lunes a viernes de 8:30 a 17:30</td>
         </tr>
       </table>
@@ -45,6 +69,7 @@
     margin-left:auto;
     margin-right:auto;
     width:90%;
+    height: 100px;
     margin-top:10px;
   }
 
@@ -52,6 +77,7 @@
     border: 2px solid #7d7c7c;
     text-align: center;
     padding: 8px;
+    height: 90px;
   }
 
   tr:nth-child(even) {

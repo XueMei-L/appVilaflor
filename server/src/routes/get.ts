@@ -130,12 +130,14 @@ appGetRouter.get('/products',async (req, res) => {
  */
 appGetRouter.get('/productSearch',async (req, res) => {
     const a = JSON.stringify(req.query.name)
+    const p = a.replace(/"/g, "").toUpperCase()
+    console.log(p)
     try {
         const list:any = [];
         const allProduct = await Product.find();
-        const p = a.replace(/"/g, "").toUpperCase()
+        console.log(allProduct)
         allProduct.forEach(element => {
-            // console.log(element['name'])
+            console.log(element['name'])
             if(element['name'].includes(p)) {
                 console.log(111)
                 list.push(element)

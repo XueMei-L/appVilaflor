@@ -79,7 +79,7 @@ export default {
   // Antes de montar la pagina. autocarga
   mounted () {
     axios
-      .get('http://localhost:8081/products?type=Perfumes')
+      .get('http://localhost:8081/products?type=Otros')
       .then((response) => {
         this.products = response.data
         console.log(this.products)

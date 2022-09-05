@@ -36,6 +36,7 @@
         <li><router-link to="/Menu">Categoria</router-link></li>
         <li><router-link to="/menu_section/pedido" v-if="$store.state.isUserLoggedIn">Pedido</router-link></li>
         <li><router-link to="/contact">Contacto</router-link></li>
+        <li><router-link to="/footer/empleo">Empleos</router-link></li>
         <p class="navegador"></p>
       </ul>
     </div>

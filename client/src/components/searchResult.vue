@@ -34,7 +34,7 @@
           <b>{{ p.pricePerOne }} €/Kg </b><br/><br/>
           <button v-if="!$store.state.isUserLoggedIn" class="button" v-on:click=addProduct(p.name)>Añadir</button>
           <button v-else-if="user.type === 'admin'" class="button" v-on:click=addProduct(p.name)>editar</button>
-          <button v-else class="button" v-on:click=addProduct(p.name)>Añadir</button>
+          <button v-else class="button" v-on:click=addProduct(user.email,p.name)>Añadir</button>
       </div>
     </div>
     </div>
@@ -63,8 +63,13 @@ export default {
     back () {
       this.$router.back(-1)
     },
-    addProduct (name) {
-      alert('add' + name)
+    async addProduct (user, name) {
+      console.log(user, name)
+      await axios.patch(`http://localhost:8081/pedido?email=${user}&pedido=${name}`
+      ).then(res => {
+        console.log(res)
+      })
+      alert('añadir ' + name)
     },
     search () {
       this.productsSearchResult = []

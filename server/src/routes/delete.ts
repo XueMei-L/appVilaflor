@@ -59,3 +59,18 @@ appDeleteRouter.delete('/delete', async (req, res) => {
       res.status(400).send();
     }
 });
+
+appDeleteRouter.delete('/delete/:id', async (req, res) => {
+  console.log(123)
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+
+    if (!product) {
+      return res.status(404).send();
+    }
+
+    return res.send(product);
+  } catch (error) {
+    return res.status(400).send();
+  }
+});
