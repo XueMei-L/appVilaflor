@@ -53,7 +53,6 @@ appPatchRouter.patch('/products', async (req, res) => {
  */
 
 appPatchRouter.patch('/pedido', async (req, res) => {
-  console.log(req.query.pedido)
   if (!req.query.email) {
     return res.status(400).send({
       error: 'A email must be provided',
@@ -71,7 +70,6 @@ appPatchRouter.patch('/pedido', async (req, res) => {
     });
   }
   try {
-    console.log('99')
     const updateShopUser = await User.updateOne(
       { email: req.query.email },
       { $push: { pedido: [req.query.pedido?.toString()] } },
@@ -80,7 +78,6 @@ appPatchRouter.patch('/pedido', async (req, res) => {
       res.status(201).send(updateShopUser);
 
   } catch (error) {
-    console.log('123')
     return res.status(400).send(error);
   }
 });
@@ -90,7 +87,6 @@ appPatchRouter.patch('/pedido', async (req, res) => {
  */
 
 appPatchRouter.patch('/shop', async (req, res) => {
-  console.log('aquiiiiiiiii')
   if (!req.query.email) {
     return res.status(400).send({
       error: 'A email must be provided',
@@ -120,7 +116,6 @@ appPatchRouter.patch('/shop', async (req, res) => {
     res.status(201).send(updateShopUser);
 
   } catch (error) {
-    console.log('123')
     return res.status(400).send(error);
   }
 });
