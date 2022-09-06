@@ -6,11 +6,6 @@ import fs from 'fs-extra';
 
 export const appGetRouter = express();
 
-/** 
- * For GET  - req.params req.query
- * For POST - req.body
- */
-
 /**
  * Consultar a un usuario
  */
@@ -22,7 +17,6 @@ appGetRouter.get('/users', async (req, res) => {
         const user = await User.find(filter);
 
         if (user.length !== 0) {
-            console.log(user)
             return res.status(200).send(user[0].email)
         } else {
             return res.status(404).send();
@@ -33,8 +27,6 @@ appGetRouter.get('/users', async (req, res) => {
 })
 
 appGetRouter.get('/pedido', async (req, res) => {
-    console.log('email')
-    console.log(req.query.email)
     try {
         const filter = req.query.email? {
             email: req.query.email.toString(),
@@ -57,22 +49,18 @@ appGetRouter.get('/pedido', async (req, res) => {
  * Consultar un producto desde la bbdd - FINISHED
  */
 appGetRouter.get('/product', async (req, res) => {
-    console.log('1111111111111')
     try {
         const filter = req.query.name? {
             name: req.query.name.toString(),
         }:{};
         const product = await Product.find(filter);
 
-        // forma de encontrar dato concreto
-        // console.log(product[0]['imagePath'])
 
         if (product.length !== 0) {
             return res.send(product);
         } else {
             return res.status(404).send();
         }
-
     } catch (error) {
         return res.status(500).send();
     }
@@ -107,13 +95,12 @@ appGetRouter.get('/files', async(req, res) => {
  * Consultar a todos los productos
  */
 appGetRouter.get('/products',async (req, res) => {
-    console.log('123')
     try {
         const filter = req.query.type? {
             type: req.query.type.toString(),
         }:{};
         const allProduct = await Product.find(filter);
-        return res.json(allProduct)
+        return res.status(200).json(allProduct)
     } catch (err) {
         return res.status(500).send();
     }
@@ -125,15 +112,11 @@ appGetRouter.get('/products',async (req, res) => {
 appGetRouter.get('/productSearch',async (req, res) => {
     const a = JSON.stringify(req.query.name)
     const p = a.replace(/"/g, "").toUpperCase()
-    console.log(p)
     try {
         const list:any = [];
         const allProduct = await Product.find();
-        console.log(allProduct)
         allProduct.forEach(element => {
-            console.log(element['name'])
             if(element['name'].includes(p)) {
-                console.log(111)
                 list.push(element)
             }
         });
