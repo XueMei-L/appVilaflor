@@ -14,29 +14,23 @@ export const appGetRouter = express();
 /**
  * Consultar a un usuario
  */
-// appGetRouter.get('/users', async (req, res) => {
-//     console.log(req.query.password)
-//     try {
-//         const filter = req.query.email? {
-//             email: req.query.email.toString(),
-//         }:{};
-//         const user = await User.find(filter);
+appGetRouter.get('/users', async (req, res) => {
+    try {
+        const filter = req.query.email? {
+            email: req.query.email.toString(),
+        }:{};
+        const user = await User.find(filter);
 
-//         if (user.length !== 0) {
-//             if(req.query.password !== user[0].password) {
-//                 res.status(403).send({
-//                     error: 'The login information was incorrect'
-//                 })
-//             } else {
-//                 return res.status(200).send(user)
-//             }
-//         } else {
-//             return res.status(404).send();
-//         }
-//     } catch (error) {
-//         return res.status(500).send();
-//     }
-// })
+        if (user.length !== 0) {
+            console.log(user)
+            return res.status(200).send(user[0].email)
+        } else {
+            return res.status(404).send();
+        }
+    } catch (error) {
+        return res.status(500).send();
+    }
+})
 
 appGetRouter.get('/pedido', async (req, res) => {
     console.log('email')
